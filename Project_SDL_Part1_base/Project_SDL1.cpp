@@ -78,7 +78,7 @@ namespace {
 		
 	}
 	
-
+/*Ne s'eteint pas au bout d'un certain delai mais quand on quitte avec la croix*/
 	int application::loop(unsigned period){
 		while(is_open){
 			while (SDL_PollEvent(&window_event_)) {
@@ -109,5 +109,10 @@ namespace {
 
 	ground::ground(SDL_Surface* window_surface_ptr){
 		//TODO
+	}
+
+	void ground::add_animal(const std::string& file_path, SDL_Surface* window_surface_ptr){
+		//animal::animal(file_path, window_surface_ptr);
+
 	}
 	

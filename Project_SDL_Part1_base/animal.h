@@ -17,14 +17,17 @@ class animal
 		// non-owning
 		SDL_Surface* window_surface_ptr_;
 		// The texture of the sheep (the loaded image), use load_surface_for
-		
+		SDL_Texture* texture_img_;
+		SDL_Surface * image_;
+		float x; 
+		float y;
+		//int w, h; 
 		// todo: Attribute(s) to define its position
 	
 	public:
 		// todo: The constructor has to load the sdl_surface that corresponds 
 		// to the texture
-		animal(const std::string& file_path, SDL_Surface* window_surface_ptr)
-		{}; 
+		animal(const std::string& file_path, SDL_Surface* window_surface_ptr) {}; 
 
 		// todo: Use the destructor to release memory and clean-up behind you
 		~animal(){};
@@ -32,7 +35,7 @@ class animal
 		// todo: Draw the animal on the screen window_surface_ptr
 		// Note that this function is not virtual, it does not depend on the 
 		// static type of the instance
-		void draw(){};
+		void draw(SDL_Renderer *window_renderer){};
 
 		// todo: Animals move around, but in a different fashion depending on 
 		// which type of animal
