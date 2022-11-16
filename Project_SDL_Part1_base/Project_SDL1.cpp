@@ -36,3 +36,24 @@ namespace
 		// See SDL_ConvertSurface
 	}
 }
+
+application::application(unsigned n_sheep, unsigned n_wolf) {
+	
+	// On créé la fenêtre
+	this->window_ptr_ = SDL_CreateWindow("Jeu EPITA CPP", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, frame_width, frame_height, 0);
+
+	// On récupère la surface
+	this->window_surface_ptr_ = SDL_GetWindowSurface(this->window_ptr_);
+
+	// On charge les moutons
+	for (int i = 0; i < n_sheep; i++) {
+		std::unique_ptr<Animal> sheep = std::make_unique<Sheep>(this->window_surface_ptr_);
+		this->playing_ground->add_character(std::move(sheep));
+	}
+
+	// On charge les loups
+	for (int i = 0; i < n_wolf; i++) {
+		std::unique_ptr<Animal> wolf = std::make_unique<Wolf>(this->window_surface_ptr_);
+		this->playing_ground->add_character(std::move(wolf));
+	}
+}
