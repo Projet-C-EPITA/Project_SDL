@@ -33,8 +33,10 @@ class ground
 	private:
 		// Attention, non-owning ptr, again to the screen
 		SDL_Surface* window_surface_ptr_;
-		sheep* sheeps;/* add smart pointer*/
-		wolf* wolves;
+		std::shared_ptr<sheep> sheeps;
+		std::shared_ptr<wolf> wolves;
+		//sheep* sheeps;/* add smart pointer */ 
+		//wolf* wolves;
 		// Some attribute to store all the wolves and sheep here
 	
 	public:
@@ -45,7 +47,8 @@ class ground
 		~ground(){};
 
 		// todo: Add an animal
-		void add_animal(const std::string& file_path, SDL_Surface* window_surface_ptr);
+		// indiquer un num pour savoir quel animal store
+		void add_animal();
 
 		// todo: Refresh the screen : Move animals and draw them (method of animal)
 		void update();

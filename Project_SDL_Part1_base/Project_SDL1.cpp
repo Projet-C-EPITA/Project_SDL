@@ -111,8 +111,13 @@ namespace {
 		//TODO
 	}
 
-	void ground::add_animal(const std::string& file_path, SDL_Surface* window_surface_ptr){
+	// en parametre les remplacer avec le type d'animal qu'on appelera et mettra le file correspondant
+	void ground::add_animal(){
 		//animal::animal(file_path, window_surface_ptr);
+
+	}// ici utiliser les smart pointeur pour ajouter l'animal
+
+	void ground::update(){
 
 	}
 	

@@ -13,7 +13,7 @@ animal::animal(const std::string& file_path, SDL_Surface* window_surface_ptr){
 
 }
 
-void animal::draw(SDL_Renderer *window_renderer){
+void animal::draw(SDL_Renderer *window_renderer){// il faut aussi une position dans les arguments ?
     SDL_Texture *tmp = SDL_CreateTextureFromSurface(window_renderer, image_); /* créer une texture à partir de cette image*/
     SDL_FreeSurface(image_); /* On libère la surface, on n’en a plus besoin */
     //SDL_QueryTexture(texture_img_, NULL, NULL, &w, &h);
