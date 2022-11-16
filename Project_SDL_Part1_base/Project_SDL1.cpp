@@ -122,6 +122,6 @@ namespace {
 	}
 
 	ground::update(animal animal){
-		animal.draw();
+		animal.draw(animal.filepath, ground);
 	}
 	

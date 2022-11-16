@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include "Project_SDL1.h"
 #include "Project_SDL1.cpp"
@@ -30,7 +31,7 @@ class animal
 		// todo: Draw the animal on the screen window_surface_ptr
 		// Note that this function is not virtual, it does not depend on the 
 		// static type of the instance
-		void draw(){};
+		void draw(const char* file_path, SDL_Surface* window_surface_ptr){};
 
 		// todo: Animals move around, but in a different fashion depending on 
 		// which type of animal
