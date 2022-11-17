@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/jaden/c++/Project_SDL/Project_SDL_Part1_base/Project_SDL1.h
+SDL2/SDL.h
+-
+SDL2/SDL_image.h
+-
+iostream
+-
+map
+-
+memory
+-
+optional
+-
+vector
+-
+
+/home/jaden/c++/Project_SDL/Project_SDL_Part1_base/main.cpp
+Project_SDL1.h
+/home/jaden/c++/Project_SDL/Project_SDL_Part1_base/Project_SDL1.h
+stdio.h
+-
+string
+-
+
