@@ -19,11 +19,7 @@ class animal
 	public:
 		// todo: The constructor has to load the sdl_surface that corresponds 
 		// to the texture
-		animal(const std::string& file_path, SDL_Surface* window_surface_ptr)
-		{
-            load_surface_for(file_path, window_surface_ptr);
-
-        }; 
+		animal(const std::string& file_path, SDL_Surface* window_surface_ptr){}; 
 
 		// todo: Use the destructor to release memory and clean-up behind you
 		~animal(){};
