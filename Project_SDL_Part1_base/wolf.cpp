@@ -1,5 +1,6 @@
 #include "wolf.h"
 
+
 void wolf::move(){
     switch(rand()% dir){
         case UPLEFT: 

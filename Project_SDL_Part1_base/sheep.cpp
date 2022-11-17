@@ -1,3 +1,4 @@
+
 #include "sheep.h"
 
 //float X_pos = rand() % frame_width + 1; //position X de l'animal (aleatoire)

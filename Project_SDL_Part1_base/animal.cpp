@@ -27,6 +27,7 @@ void animal::draw(SDL_Renderer *window_renderer){// il faut aussi une position d
    
     SDL_Texture *tmp = SDL_CreateTextureFromSurface(window_renderer, image_); /* créer une texture à partir de cette image*/
     SDL_FreeSurface(image_); /* On libère la surface, on n’en a plus besoin */
+
     texture_img_ = SDL_CreateTexture(window_renderer, SDL_PIXELFORMAT_RGBA8888, 
                             SDL_TEXTUREACCESS_TARGET, image_->w, image_->h);
     SDL_SetRenderTarget(window_renderer, texture_img_); /* La cible de rendu est maintenant texture. */

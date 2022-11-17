@@ -146,4 +146,4 @@ namespace {
 	void ground::update(){
 		//	animal.draw(animal.filepath, ground);
 	}
-	
+
