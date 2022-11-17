@@ -39,6 +39,17 @@ namespace {
 	{
 		// Helper function to load a png for a specific surface
 		// See SDL_ConvertSurface
+		if (!window_surface_ptr){
+			std::cout << "Error : window surface ptr is invalid" << std::endl;
+			return (nullptr);
+		}
+
+		window_surface_ptr = SDL_ConvertSurface(IMG_Load(path.c_str()), window_surface_ptr->format, 0);
+		if (!window_surface_ptr){
+			std::cout << "Error during creation of surface." << std::endl;
+			return (nullptr);
+		}
+
 		return window_surface_ptr;
 	}
 		
@@ -100,6 +111,7 @@ namespace {
 			lastTime = SDL_GetTicks();*/
 				
 		}
+		//A mettre dans le dtor de app
 		SDL_DestroyRenderer(window_renderer_);
 		SDL_DestroyWindow(window_ptr_);
 		SDL_Quit();

@@ -7,8 +7,7 @@
 #include <memory>
 #include <optional>
 #include <vector>
-#include "sheep.h"
-#include "wolf.h"
+
 
 
 // Definitions
@@ -33,10 +32,9 @@ class ground
 	private:
 		// Attention, non-owning ptr, again to the screen
 		SDL_Surface* window_surface_ptr_;
-		std::shared_ptr<sheep> sheeps;
-		std::shared_ptr<wolf> wolves;
-		//sheep* sheeps;/* add smart pointer */ 
-		//wolf* wolves;
+	//	std::shared_ptr<sheep> sheeps;
+	//	std::shared_ptr<wolf> wolves;
+	//	std::shared_ptr<animal> animals;
 		// Some attribute to store all the wolves and sheep here
 	
 	public:
@@ -48,10 +46,12 @@ class ground
 
 		// todo: Add an animal
 		// indiquer un num pour savoir quel animal store
-		void add_animal();
+		void add_animal();// param ptr shared avec list animal
+		// push.back()
 
 		// todo: Refresh the screen : Move animals and draw them (method of animal)
 		void update();
+		// for all the animals animals.draw(); animals.move();
 
 		// Possibly other methods, depends on your implementation
 };

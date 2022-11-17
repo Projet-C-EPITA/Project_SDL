@@ -1,7 +1,7 @@
 #include "sheep.h"
 
-float X_pos = rand() % frame_width + 1; //position X de l'animal (aleatoire)
-float Y_pos = rand() % frame_height + 1; // position Y de lanimal
+//float X_pos = rand() % frame_width + 1; //position X de l'animal (aleatoire)
+//float Y_pos = rand() % frame_height + 1; // position Y de lanimal
 
 void sheep::move(){
 
@@ -85,3 +85,8 @@ void sheep::move(){
     lastDir = dir; //it saves the last direction
 }                 
 
+
+sheep::~sheep(){
+    SDL_FreeSurface(image_);
+    std::cout << "A sheep was eaten" << std::endl;
+};

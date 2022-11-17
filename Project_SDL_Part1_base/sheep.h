@@ -1,25 +1,12 @@
 #pragma once
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include "Project_SDL1.h"
-#include <iostream>
-#include <map>
-#include <memory>
-#include <optional>
-#include <vector>
 #include "animal.h"
 
 
 class sheep : public animal {
 	
 	private: 
-	
-	//float X = rand() % frame_width + 1;   //random starting point
-   	//float Y = rand() % frame_height + 1;
 	int lastDir;
-	enum eDirection {UPLEFT, UPRIGHT, DOWNRIGHT, DOWNLEFT, UP, DOWN, RIGHT, LEFT};
-	eDirection dir = UPRIGHT; 
 	
 	public:
 
