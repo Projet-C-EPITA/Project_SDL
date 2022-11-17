@@ -9,6 +9,9 @@
 #include <optional>
 #include <vector>
 
+float X_pos = rand() % frame_width + 1; //position X de l'animal (aleatoire)
+float Y_pos = rand() % frame_height + 1;
+
 
 class animal
 {
@@ -18,10 +21,15 @@ class animal
 		SDL_Surface* window_surface_ptr_;
 		// The texture of the sheep (the loaded image), use load_surface_for
 		SDL_Texture* texture_img_;
+
+		
+		//float x; 
+		//float y;
+	protected:
 		SDL_Surface * image_;
-		float x; 
-		float y;
-		//int w, h; 
+		enum eDirection {UPLEFT, UPRIGHT, DOWNRIGHT, DOWNLEFT, UP, DOWN, RIGHT, LEFT};
+		eDirection dir = UPRIGHT; 
+		
 		// todo: Attribute(s) to define its position
 	
 	public:
@@ -37,7 +45,10 @@ class animal
 		// static type of the instance
 		void draw(SDL_Renderer *window_renderer){};
 
+		//void draw(const char* file_path, SDL_Surface* window_surface_ptr){};
+
 		// todo: Animals move around, but in a different fashion depending on 
 		// which type of animal
 		virtual void move() = 0;
+
 };
