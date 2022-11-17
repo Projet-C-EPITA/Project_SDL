@@ -7,6 +7,10 @@
 #include <random>
 #include <string>
 #include <SDL.h>
+#include <SDL_image.h>
+#include "animal.h"
+#include "sheep.h"
+#include "wolf.h"
 
 
 void init()
@@ -39,6 +43,17 @@ namespace {
 	{
 		// Helper function to load a png for a specific surface
 		// See SDL_ConvertSurface
+		if (!window_surface_ptr){
+			std::cout << "Error : window surface ptr is invalid" << std::endl;
+			return (nullptr);
+		}
+
+		window_surface_ptr = SDL_ConvertSurface(IMG_Load(path.c_str()), window_surface_ptr->format, 0);
+		if (!window_surface_ptr){
+			std::cout << "Error during creation of surface." << std::endl;
+			return (nullptr);
+		}
+
 		return window_surface_ptr;
 	}
 		
@@ -49,7 +64,24 @@ namespace {
 		Nsheep = n_sheep;
 		Nwolf = n_wolf;
 		createWindow();		
-			
+
+		/*this->window_ptr_ = SDL_CreateWindow("Jeu EPITA CPP", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, frame_width, frame_height, 0);
+
+		// On récupère la surface
+		this->window_surface_ptr_ = SDL_GetWindowSurface(this->window_ptr_);
+
+		// On charge les moutons
+		for (int i = 0; i < n_sheep; i++) {
+			std::unique_ptr<Animal> sheep = std::make_unique<Sheep>(this->window_surface_ptr_);
+			this->playing_ground->add_character(std::move(sheep));
+		}
+
+		// On charge les loups
+		for (int i = 0; i < n_wolf; i++) {
+			std::unique_ptr<Animal> wolf = std::make_unique<Wolf>(this->window_surface_ptr_);
+			this->playing_ground->add_character(std::move(wolf));
+		}
+			*/
 	}
 
 	application::~application(){
@@ -78,28 +110,25 @@ namespace {
 		
 	}
 	
-
+/*Ne s'eteint pas au bout d'un certain delai mais quand on quitte avec la croix*/
 	int application::loop(unsigned period){
-		while(is_open){
-			while (SDL_PollEvent(&window_event_)) {
-				switch (window_event_.type)
-				{
+		std::cout << "test 3";
+		animal wolf("./wolf.png", window_surface_ptr_);
+		std::cout << "test 4";
+		wolf.draw(window_surface_ptr_);
+
+		std::cout << "test 5";
+		SDL_UpdateWindowSurface(window_ptr_);
+		while(SDL_GetTicks() < (period*1000) && is_open){
+			SDL_PollEvent(&window_event_);
+			switch (window_event_.type) {
 				case SDL_QUIT:
 					is_open = false;
 					break;
-				}
-        	}
-		
-			SDL_UpdateWindowSurface(window_ptr_);
-	
-			/*int time = SDL_GetTicks() - lastTime;
-			if(time < 0) time = 0;
-			if(time < period / 60)
-				SDL_Delay( (period / 60) - time);
-			
-			lastTime = SDL_GetTicks();*/
-				
-		}
+			}
+		}	
+
+		//A mettre dans le dtor de app
 		SDL_DestroyRenderer(window_renderer_);
 		SDL_DestroyWindow(window_ptr_);
 		SDL_Quit();
@@ -111,17 +140,20 @@ namespace {
 		//TODO
 	}
 
-	ground::add_animal(string type){
-		string file_path;
+	// en parametre les remplacer avec le type d'animal qu'on appelera et mettra le file correspondant
+	void ground::add_animal(){
+		/*string file_path;
 		if(type == "sheep")
 			file_path = "sheep.png";
 		else if(type == "wolf")
 			file_path = "wolf.png";
 		animal animal = new animal(file_path, ground);
 		update(animal);
+		//animal::animal(file_path, window_surface_ptr);
+*/
+	}// ici utiliser les smart pointeur pour ajouter l'animal
+
+	void ground::update(){
+		//	animal.draw(animal.filepath, ground);
 	}
 
-	ground::update(animal animal){
-		animal.draw(animal.filepath, ground);
-	}
-	
