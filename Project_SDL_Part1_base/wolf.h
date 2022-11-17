@@ -4,10 +4,7 @@
 
 class wolf : public animal
 {
-	// todo
-	// Ctor
-	// Dtor
-	// Implement functions that are purely virtual in base class
+	
     public:
 
 	wolf(const std::string& file_path, SDL_Surface* window_surface_ptr): 

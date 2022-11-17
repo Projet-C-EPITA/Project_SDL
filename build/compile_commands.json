@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/cam/Documents/GitHub/Project_SDL/build/Project_SDL_Part1_base",
+  "command": "/usr/bin/g++  -I/usr/include/SDL2 -I/usr/include/SDL2_image -g -o CMakeFiles/SDL_part1.dir/main.cpp.o -c /home/cam/Documents/GitHub/Project_SDL/Project_SDL_Part1_base/main.cpp",
+  "file": "/home/cam/Documents/GitHub/Project_SDL/Project_SDL_Part1_base/main.cpp"
+},
+{
+  "directory": "/home/cam/Documents/GitHub/Project_SDL/build/Project_SDL_Part1_base",
+  "command": "/usr/bin/g++  -I/usr/include/SDL2 -I/usr/include/SDL2_image -g -o CMakeFiles/SDL_part1.dir/Project_SDL1.cpp.o -c /home/cam/Documents/GitHub/Project_SDL/Project_SDL_Part1_base/Project_SDL1.cpp",
+  "file": "/home/cam/Documents/GitHub/Project_SDL/Project_SDL_Part1_base/Project_SDL1.cpp"
+}
+]

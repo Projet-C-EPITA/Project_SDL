@@ -109,7 +109,7 @@ namespace {
 /*Ne s'eteint pas au bout d'un certain delai mais quand on quitte avec la croix*/
 	int application::loop(unsigned period){
 		SDL_UpdateWindowSurface(window_ptr_);
-		while(SDL_GetTicks() < period && is_open){
+		while(SDL_GetTicks() < (period*1000) && is_open){
 			SDL_PollEvent(&window_event_);
 			switch (window_event_.type) {
 				case SDL_QUIT:
