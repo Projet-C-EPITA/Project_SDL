@@ -42,6 +42,7 @@ class animal
 		// Note that this function is not virtual, it does not depend on the 
 		// static type of the instance
 		void draw(SDL_Renderer *window_renderer){};
+		//void draw(const char* file_path, SDL_Surface* window_surface_ptr){};
 
 		// todo: Animals move around, but in a different fashion depending on 
 		// which type of animal
