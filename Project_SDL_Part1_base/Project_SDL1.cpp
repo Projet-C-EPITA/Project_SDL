@@ -113,9 +113,9 @@ namespace {
 /*Ne s'eteint pas au bout d'un certain delai mais quand on quitte avec la croix*/
 	int application::loop(unsigned period){
 		animal wolf("wolf.png", window_surface_ptr_);
-		wolf.draw(window_renderer_);
+		wolf.draw(window_renderer_, window_surface_ptr_);
 
-		// SDL_UpdateWindowSurface(window_ptr_);
+		SDL_UpdateWindowSurface(window_ptr_);
 		while(SDL_GetTicks() < (period*1000) && is_open){
 			SDL_PollEvent(&window_event_);
 			switch (window_event_.type) {
