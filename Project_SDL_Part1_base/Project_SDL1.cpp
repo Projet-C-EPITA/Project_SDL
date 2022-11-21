@@ -112,13 +112,10 @@ namespace {
 	
 /*Ne s'eteint pas au bout d'un certain delai mais quand on quitte avec la croix*/
 	int application::loop(unsigned period){
-		std::cout << "test 3";
-		animal wolf("./wolf.png", window_surface_ptr_);
-		std::cout << "test 4";
-		wolf.draw(window_surface_ptr_);
+		animal wolf("wolf.png", window_surface_ptr_);
+		wolf.draw(window_renderer_);
 
-		std::cout << "test 5";
-		SDL_UpdateWindowSurface(window_ptr_);
+		// SDL_UpdateWindowSurface(window_ptr_);
 		while(SDL_GetTicks() < (period*1000) && is_open){
 			SDL_PollEvent(&window_event_);
 			switch (window_event_.type) {

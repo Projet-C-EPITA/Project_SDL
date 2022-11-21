@@ -44,16 +44,21 @@ class animal
 		// Note that this function is not virtual, it does not depend on the 
 		// static type of the instance
 		// void draw(SDL_Renderer *window_renderer);
-		void draw(SDL_Surface* window_surface_ptr_){
-		//    SDL_LockSurface(window_surface_ptr);
-		SDL_Surface* image = IMG_Load("./wolf.png");
-		// SDL_RenderCopy();
-		SDL_Rect position;
-		int range_x = (frame_width-frame_boundary) - frame_boundary + 1;
-        int range_y = (frame_height-frame_boundary) - frame_boundary + 1;
-        position.x = rand() % range_x + frame_boundary;
-        position.y = rand() % range_y + frame_boundary;
-      	SDL_BlitSurface(image, NULL, window_surface_ptr_, &position);
+		void draw(SDL_Renderer* window_renderer_){
+
+			//    SDL_LockSurface(window_surface_ptr);
+			SDL_Surface* image = IMG_Load("./wolf.png");
+			SDL_Texture* texture = SDL_CreateTextureFromSurface(window_renderer_, image);
+			SDL_Rect rect = {5, 5, 62, 42};
+			SDL_RenderCopy(window_renderer_, texture, NULL, &rect);
+			SDL_RenderPresent(window_renderer_);
+			// SDL_RenderCopy();
+			// SDL_Rect position;
+			// int range_x = (frame_width-frame_boundary) - frame_boundary + 1;
+			// int range_y = (frame_height-frame_boundary) - frame_boundary + 1;
+			// position.x = rand() % range_x + frame_boundary;
+			// position.y = rand() % range_y + frame_boundary;
+			// SDL_BlitSurface(image, NULL, window_surface_ptr_, &position);
 		};
 
 		//void draw(const char* file_path, SDL_Surface* window_surface_ptr){};

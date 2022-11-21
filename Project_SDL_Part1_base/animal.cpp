@@ -20,17 +20,17 @@ animal::animal(const std::string& file_path, SDL_Surface* window_surface_ptr){
 }
 
 void draw(SDL_Surface* window_surface_ptr_){
-    std::cout << "test 1";
-//    SDL_LockSurface(window_surface_ptr);
-    SDL_Surface* image = IMG_Load("./wolf.png");
-    // SDL_RenderCopy();
-    SDL_Rect position;
-   int range_x = (frame_width-frame_boundary) - frame_boundary + 1;
-        int range_y = (frame_height-frame_boundary) - frame_boundary + 1;
-        position.x = rand() % range_x + frame_boundary;
-        position.y = rand() % range_y + frame_boundary;
-        std::cout << "test 2";
-      SDL_BlitSurface(image, NULL, window_surface_ptr_, &position);
+//     std::cout << "test 1";
+// //    SDL_LockSurface(window_surface_ptr);
+//     SDL_Surface* image = IMG_Load("./wolf.png");
+//     // SDL_RenderCopy();
+//     SDL_Rect position;
+//    int range_x = (frame_width-frame_boundary) - frame_boundary + 1;
+//         int range_y = (frame_height-frame_boundary) - frame_boundary + 1;
+//         position.x = rand() % range_x + frame_boundary;
+//         position.y = rand() % range_y + frame_boundary;
+//         std::cout << "test 2";
+//       SDL_BlitSurface(image, NULL, window_surface_ptr_, &position);
 
    
     // SDL_Texture *tmp = SDL_CreateTextureFromSurface(window_renderer, image_); /* créer une texture à partir de cette image*/
