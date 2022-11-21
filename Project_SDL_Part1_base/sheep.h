@@ -19,6 +19,6 @@ class sheep : public animal {
 	//they can produce an offspring 
 
 	// Call sheep1.move();
-	virtual void move() override;
+	// virtual void move() override;
 	
 };

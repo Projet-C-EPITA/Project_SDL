@@ -7,6 +7,9 @@
 #include <random>
 #include <string>
 #include <SDL.h>
+#include "animal.h"
+#include "wolf.h"
+#include "sheep.h"
 
 
 void init()
@@ -108,6 +111,9 @@ namespace {
 	
 /*Ne s'eteint pas au bout d'un certain delai mais quand on quitte avec la croix*/
 	int application::loop(unsigned period){
+		animal wolf("../../media/wolf.png", window_surface_ptr_);
+		wolf.draw(window_renderer_, window_surface_ptr_, "../../media/wolf.png");
+
 		SDL_UpdateWindowSurface(window_ptr_);
 		while(SDL_GetTicks() < (period*1000) && is_open){
 			SDL_PollEvent(&window_event_);
