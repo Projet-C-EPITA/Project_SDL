@@ -1,7 +1,7 @@
 #include "wolf.h"
 
 
- void wolf::move(){
+/* void wolf::move(){
      switch(rand()% dir){
          case UPLEFT: 
              X_pos--;     //this code moves the sheep 
@@ -32,8 +32,13 @@
              Y_pos--;
              break;
      }
- }
+ } */
 wolf::~wolf(){
     SDL_FreeSurface(image_);
     std::cout << "A wolf is DEAD" << std::endl;
 };
+
+void wolf::update() {
+    this->move();
+    this->draw();
+}
