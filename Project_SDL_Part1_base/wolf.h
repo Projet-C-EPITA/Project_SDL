@@ -13,6 +13,6 @@ class wolf : public animal
 	~wolf(){};
 	//they will direct themselves towards the nearest sheep. 
 	//If a wolf does not catch a sheep after a certain period, it will starve and die
-	void move() override;
+	// void move() override;
 	
 };
