@@ -3,6 +3,9 @@
 
 CMakeFiles/SDL_part1.dir/Project_SDL1.cpp.o: ../Project_SDL1.cpp
 CMakeFiles/SDL_part1.dir/Project_SDL1.cpp.o: ../Project_SDL1.h
+CMakeFiles/SDL_part1.dir/Project_SDL1.cpp.o: ../animal.h
+CMakeFiles/SDL_part1.dir/Project_SDL1.cpp.o: ../sheep.h
+CMakeFiles/SDL_part1.dir/Project_SDL1.cpp.o: ../wolf.h
 CMakeFiles/SDL_part1.dir/Project_SDL1.cpp.o: /usr/include/SDL2/SDL.h
 CMakeFiles/SDL_part1.dir/Project_SDL1.cpp.o: /usr/include/SDL2/SDL_assert.h
 CMakeFiles/SDL_part1.dir/Project_SDL1.cpp.o: /usr/include/SDL2/SDL_atomic.h

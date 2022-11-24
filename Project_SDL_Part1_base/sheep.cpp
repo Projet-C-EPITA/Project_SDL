@@ -1,34 +1,34 @@
 
 #include "sheep.h"
 
-//float X_pos = rand() % frame_width + 1; //position X de l'animal (aleatoire)
-//float Y_pos = rand() % frame_height + 1; // position Y de lanimal
+float X_pos = rand() % frame_width + 1; //position X de l'animal (aleatoire)
+float Y_pos = rand() % frame_height + 1; // position Y de lanimal
 
 void sheep::move(){
 
     //bounces on the sides
-    // if (X_pos == 1 || X_pos == frame_width) {
-    //     switch (lastDir) {
-    //     case 0:
-    //         dir = UPRIGHT;   //this code checks if the sheep is right next to a wall 
-    //         break;                 
-    //     case 1:               
-    //         dir = UPLEFT;    
-    //         break;
-    //     case 2:
-    //         dir = DOWNLEFT;
-    //         break;
-    //     case 3:
-    //         dir = DOWNRIGHT;
-    //         break;
-    //     case 6: // pas mis de case 4 parceque on atteint pas les side si on va que en haut
-    //         dir = LEFT;//pas sur que ca soit atteint
-    //         break;
-    //     case 7: 
-    //         dir = RIGHT;
-    //         break;
-    //     }
-    // }
+    if (X_pos == 1 || X_pos == frame_width) {
+         switch (lastDir) {
+         case 0:
+             dir = UPRIGHT;   //this code checks if the sheep is right next to a wall 
+             break;                 
+         case 1:               
+             dir = UPLEFT;    
+             break;
+         case 2:
+             dir = DOWNLEFT;
+             break;
+         case 3:
+             dir = DOWNRIGHT;
+             break;
+         case 6: // pas mis de case 4 parceque on atteint pas les side si on va que en haut
+             dir = LEFT;//pas sur que ca soit atteint
+             break;
+         case 7: 
+             dir = RIGHT;
+             break;
+         }
+    }
     // //bounces on the top and bottom
     // if (Y_pos == 1 || Y_pos == frame_height) {
     //     switch (lastDir) {

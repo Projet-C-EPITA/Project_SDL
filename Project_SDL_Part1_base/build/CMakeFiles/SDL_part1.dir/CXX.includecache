@@ -23,6 +23,12 @@ string
 -
 SDL.h
 -
+animal.h
+/home/maxence/Desktop/Project_SDL/Project_SDL_Part1_base/animal.h
+wolf.h
+/home/maxence/Desktop/Project_SDL/Project_SDL_Part1_base/wolf.h
+sheep.h
+/home/maxence/Desktop/Project_SDL/Project_SDL_Part1_base/sheep.h
 
 /home/maxence/Desktop/Project_SDL/Project_SDL_Part1_base/Project_SDL1.h
 SDL2/SDL.h
@@ -40,13 +46,31 @@ optional
 vector
 -
 
-/home/maxence/Desktop/Project_SDL/Project_SDL_Part1_base/main.cpp
+/home/maxence/Desktop/Project_SDL/Project_SDL_Part1_base/animal.h
+SDL2/SDL.h
+-
+SDL2/SDL_image.h
+-
 Project_SDL1.h
 /home/maxence/Desktop/Project_SDL/Project_SDL_Part1_base/Project_SDL1.h
-stdio.h
+iostream
 -
-string
+map
 -
+memory
+-
+optional
+-
+vector
+-
+
+/home/maxence/Desktop/Project_SDL/Project_SDL_Part1_base/sheep.h
+animal.h
+/home/maxence/Desktop/Project_SDL/Project_SDL_Part1_base/animal.h
+
+/home/maxence/Desktop/Project_SDL/Project_SDL_Part1_base/wolf.h
+animal.h
+/home/maxence/Desktop/Project_SDL/Project_SDL_Part1_base/animal.h
 
 /usr/include/SDL2/SDL.h
 SDL_main.h

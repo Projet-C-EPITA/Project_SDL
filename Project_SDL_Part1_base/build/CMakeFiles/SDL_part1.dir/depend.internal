@@ -4,6 +4,9 @@
 CMakeFiles/SDL_part1.dir/Project_SDL1.cpp.o
  /home/maxence/Desktop/Project_SDL/Project_SDL_Part1_base/Project_SDL1.cpp
  /home/maxence/Desktop/Project_SDL/Project_SDL_Part1_base/Project_SDL1.h
+ /home/maxence/Desktop/Project_SDL/Project_SDL_Part1_base/animal.h
+ /home/maxence/Desktop/Project_SDL/Project_SDL_Part1_base/sheep.h
+ /home/maxence/Desktop/Project_SDL/Project_SDL_Part1_base/wolf.h
  /usr/include/SDL2/SDL.h
  /usr/include/SDL2/SDL_assert.h
  /usr/include/SDL2/SDL_atomic.h
