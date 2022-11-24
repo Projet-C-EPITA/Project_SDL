@@ -7,6 +7,9 @@
 #include <random>
 #include <string>
 #include <SDL.h>
+#include "animal.h"
+#include "wolf.h"
+#include "sheep.h"
 
 
 void init()
@@ -62,16 +65,13 @@ namespace {
 		createWindow();		
 
 		/*this->window_ptr_ = SDL_CreateWindow("Jeu EPITA CPP", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, frame_width, frame_height, 0);
-
 		// On récupère la surface
 		this->window_surface_ptr_ = SDL_GetWindowSurface(this->window_ptr_);
-
 		// On charge les moutons
 		for (int i = 0; i < n_sheep; i++) {
 			std::unique_ptr<Animal> sheep = std::make_unique<Sheep>(this->window_surface_ptr_);
 			this->playing_ground->add_character(std::move(sheep));
 		}
-
 		// On charge les loups
 		for (int i = 0; i < n_wolf; i++) {
 			std::unique_ptr<Animal> wolf = std::make_unique<Wolf>(this->window_surface_ptr_);
@@ -108,6 +108,9 @@ namespace {
 	
 /*Ne s'eteint pas au bout d'un certain delai mais quand on quitte avec la croix*/
 	int application::loop(unsigned period){
+		animal wolf("../../media/wolf.png", window_surface_ptr_);
+		wolf.draw(window_renderer_, window_surface_ptr_, "../../media/wolf.png");
+
 		SDL_UpdateWindowSurface(window_ptr_);
 		while(SDL_GetTicks() < (period*1000) && is_open){
 			SDL_PollEvent(&window_event_);
@@ -146,4 +149,3 @@ namespace {
 	void ground::update(){
 		//	animal.draw(animal.filepath, ground);
 	}
-
