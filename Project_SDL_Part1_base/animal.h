@@ -2,17 +2,16 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include "Project_SDL1.h"
+//#include "Project_SDL1.h"
 #include <iostream>
 #include <map>
 #include <memory>
 #include <optional>
 #include <vector>
 
-float X_pos = rand() % frame_width + 1; //position X de l'animal (aleatoire)
-float Y_pos = rand() % frame_height + 1;
+//Deplacer
 
-
+/**
 class animal
 {
 	private:
@@ -22,15 +21,12 @@ class animal
 		// The texture of the sheep (the loaded image), use load_surface_for
 		SDL_Texture* texture_img_;
 
-		
-		//float x; 
-		//float y;
 	protected:
 		SDL_Surface * image_;
 		enum eDirection {UPLEFT, UPRIGHT, DOWNRIGHT, DOWNLEFT, UP, DOWN, RIGHT, LEFT};
 		eDirection dir = UPRIGHT; 
 		
-		// todo: Attribute(s) to define its position
+		SDL_Rect pos; //position de l'animal
 	
 	public:
 		// todo: The constructor has to load the sdl_surface that corresponds 
@@ -43,17 +39,11 @@ class animal
 		// todo: Draw the animal on the screen window_surface_ptr
 		// Note that this function is not virtual, it does not depend on the 
 		// static type of the instance
-		void draw(SDL_Renderer* window_renderer_, SDL_Surface* window_surface_ptr_, const char* file_path){
-			SDL_Surface* image = IMG_Load(file_path);
-			SDL_Texture* texture = SDL_CreateTextureFromSurface(window_renderer_, image);
-			SDL_Rect rect = {5, 5, 62, 42};
-			SDL_BlitSurface(image, NULL, window_surface_ptr_, NULL);
-		};
+		void draw(){};
 
-		//void draw(const char* file_path, SDL_Surface* window_surface_ptr){};
 
 		// todo: Animals move around, but in a different fashion depending on 
 		// which type of animal
 		// virtual void move() = 0;
 
-};
+};**/

@@ -4,7 +4,7 @@
 //float X_pos = rand() % frame_width + 1; //position X de l'animal (aleatoire)
 //float Y_pos = rand() % frame_height + 1; // position Y de lanimal
 
-void sheep::move(){
+//void sheep::move(){
 
     //bounces on the sides
     // if (X_pos == 1 || X_pos == frame_width) {
@@ -87,7 +87,7 @@ void sheep::move(){
 // }                 
 
 
-sheep::~sheep(){
+/*sheep::~sheep(){
     SDL_FreeSurface(image_);
     std::cout << "A sheep was eaten" << std::endl;
-};
+};*/

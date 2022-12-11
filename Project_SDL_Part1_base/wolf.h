@@ -1,8 +1,10 @@
 #pragma once
 
-#include "animal.h"
+//#include "animal.h"
 
-class wolf : public animal
+//constexpr char file_path_w[] = "../media/wolf.png"; 
+//Deplacer
+/**class wolf : public animal
 {
 	
     public:
@@ -15,4 +17,4 @@ class wolf : public animal
 	//If a wolf does not catch a sheep after a certain period, it will starve and die
 	// void move() override;
 	
-};
+};**/

@@ -33,7 +33,7 @@
 //             break;
 //     }
 // }
-wolf::~wolf(){
+/*wolf::~wolf(){
     SDL_FreeSurface(image_);
     std::cout << "A wolf is DEAD" << std::endl;
-};
+};*/

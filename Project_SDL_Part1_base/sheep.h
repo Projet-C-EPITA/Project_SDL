@@ -1,9 +1,10 @@
 #pragma once
 
-#include "animal.h"
+//#include "animal.h"
 
-
-class sheep : public animal {
+//constexpr char file_path_s[] = "../media/sheep.png"; 
+//DEplacer
+/**class sheep : public animal {
 	
 	private: 
 	int lastDir;
@@ -21,4 +22,4 @@ class sheep : public animal {
 	// Call sheep1.move();
 	// virtual void move() override;
 	
-};
+};**/
