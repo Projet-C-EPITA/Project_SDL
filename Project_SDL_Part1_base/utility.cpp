@@ -15,7 +15,7 @@ void init()
 	/*Rajout pour ouvrir la fenêtre*/
 	
 }
-namespace {
+
 	// Defining a namespace without a name -> Anonymous workspace
 	// Its purpose is to indicate to the compiler that everything
 	// inside of it is UNIQUELY used within this source file
@@ -37,6 +37,5 @@ namespace {
 		}
 
 		return window_surface_ptr;
-	}
-		
-}
+	}	
+
