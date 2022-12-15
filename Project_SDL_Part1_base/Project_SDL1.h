@@ -1,5 +1,10 @@
-#pragma once
+#ifndef PROJECT_H
+#define PROJECT_H
 
+#include "animal.h"
+#include "wolf.h"
+#include "sheep.h"
+#include "utility.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
@@ -9,21 +14,7 @@
 #include <vector>
 
 
-
-// Definitions
-constexpr double frame_rate = 60.0;            // refresh rate
-constexpr double frame_time = 1. / frame_rate;
-constexpr unsigned frame_width = 1400;         // Width of window in pixel
-constexpr unsigned frame_height = 800;         // Height of window in pixel
-// Minimal distance of animal to the border of the screen
-constexpr unsigned frame_boundary = 100;
-
-constexpr char file_path_sheep[] = "../../media/sheep.png"; 
-constexpr char file_path_wolf[] = "../../media/wolf.png"; 
-
-// Helper function to initialize SDL
-void init();
-
+/*
 
 class animal
 {
@@ -95,7 +86,7 @@ class wolf : public animal
 	//If a wolf does not catch a sheep after a certain period, it will starve and die
 	virtual void move() override;
 	
-};
+};*/
 
 
 
@@ -106,7 +97,7 @@ class ground
 	private:
 		// Attention, non-owning ptr, again to the screen
 		SDL_Surface* window_surface_ptr_;
-		
+	protected:	
 		std::vector<std::shared_ptr<animal>> animals;
 		// Some attribute to store all the wolves and sheep here
 	
@@ -161,3 +152,4 @@ class application
 		int loop(unsigned period);
 		
 };
+#endif
