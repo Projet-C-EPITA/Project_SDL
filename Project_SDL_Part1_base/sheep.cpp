@@ -1,8 +1,10 @@
 
 #include "sheep.h"
 
-//void sheep::get_neareast_animal(std::vector<std::shared_ptr<animal>> animals){
-//}
+
+/*
+* Cette fonction bouge le mouton de sorte à ce qu'il rebondisse sur les murs
+*/
 
 void sheep::move(){
 
@@ -86,12 +88,3 @@ void sheep::move(){
       lastDir = dir; //it saves the last direction
      
   }    
-
-
-
-
-//void sheep::get_neareast_wolf(animal* wolfs){
-
-
-
-//}

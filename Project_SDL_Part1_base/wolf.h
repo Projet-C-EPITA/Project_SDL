@@ -5,13 +5,15 @@
 
 #include <iostream>
 #include <string>
+#include <chrono>
 
 class wolf : public animal{
 	
 	private: 
 	int lastDir;
 	SDL_Rect nearest_sheep_pos_;
-	
+	bool get_Sheep = false;
+	Uint32 m_lastMealTime;
     public:
 
 	wolf(const std::string& file_path, SDL_Surface* window_surface_ptr):
@@ -21,7 +23,7 @@ class wolf : public animal{
 	//they will direct themselves towards the nearest sheep. 
 	//If a wolf does not catch a sheep after a certain period, it will starve and die
 	virtual void move() ;
-
+	void time_to_catch();
 	void get_neareast_animal(std::vector<std::shared_ptr<animal>> animals);
 
 	

@@ -4,7 +4,6 @@
 #pragma once
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-//#include "Project_SDL1.h"
 #include "utility.h"
 
 #include <iostream>
@@ -44,8 +43,8 @@ class animal
 		GENDER sex;
 		SDL_Rect pos; 
 		TYPE type;
-		//position de l'animal
-		//moving moving_= moving();
+		bool isalive = true;
+		
 		// todo: The constructor has to load the sdl_surface that corresponds 
 		// to the texture
 		animal(const std::string& file_path, SDL_Surface* window_surface_ptr); 
@@ -57,12 +56,8 @@ class animal
 		// Note that this function is not virtual, it does not depend on the 
 		// static type of the instance
 		void draw();
-
-		SDL_Rect get_position();
-
 		
 		virtual void move() = 0;
-		//virtual void get_nearest_animal(std::vector<std::shared_ptr<animal>> animals) = 0;
 
 };
 

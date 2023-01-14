@@ -26,6 +26,7 @@ void ground::add_animal(const std::shared_ptr<animal>& animal){
 void ground::update(){
 		
 		for (auto &animal_ptr : animals){
+			// Calcule ici le mouton le plus proche pour change la direction du loup
 			if (animal_ptr->type == WOLF){
 				auto wolfs = std::static_pointer_cast<wolf>(animal_ptr);
 				wolfs->get_neareast_animal(ground::animals);
@@ -35,8 +36,14 @@ void ground::update(){
 		// Clear the screen
 		SDL_FillRect(window_surface_ptr_, nullptr ,SDL_MapRGB(window_surface_ptr_->format, 0, 255, 0));
 		// Draw all animals
-		for (auto &animal_ptr : animals)
+		for (auto &animal_ptr : animals){
+			//Ne marche pas encore mais verifie si l'animal est toujours en vie sinon pouf il disparait
+			if (!animal_ptr->isalive) {
+				animal_ptr.reset();// releases the resource and free the memory
+			}
 			animal_ptr->draw();	
+		}
+			
 		
 }
 
@@ -52,6 +59,7 @@ void ground::update(){
 		createWindow();	
 		ground_ = std::make_unique<ground>(window_surface_ptr_);
 	
+		// TODO : faire une rand avec l'enum sex du sheep (male,female)
 		for (int i = 0; i < Nsheep; ++i) {
 			std::shared_ptr<sheep> sheeps = std::make_shared<sheep>(file_path_sheep, window_surface_ptr_);
 			ground_->add_animal(sheeps);
@@ -64,7 +72,7 @@ void ground::update(){
 			ground_->add_animal(wolfs);
 			wolfs->draw();
 			wolfs->type = WOLF;
-			wolfs->get_neareast_animal(ground_->animals);
+			
 			
 		}
 	}	
