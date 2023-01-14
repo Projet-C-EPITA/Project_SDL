@@ -8,6 +8,8 @@
 #include <memory>
 #include <optional>
 #include <vector>
+
+#include <SDL2/SDL_surface.h>
 // Definitions
 constexpr double frame_rate = 60.0;            // refresh rate
 constexpr double frame_time = 1. / frame_rate;
@@ -20,10 +22,14 @@ constexpr char file_path_sheep[] = "../../media/sheep.png";
 constexpr char file_path_wolf[] = "../../media/wolf.png"; 
 
 // Helper function to initialize SDL
-void init();
 
+
+void init();
 
 SDL_Surface* load_surface_for(const std::string& path, 
 								  SDL_Surface* window_surface_ptr);
+
+
+
 
 #endif

@@ -1,6 +1,9 @@
 
 #include "sheep.h"
 
+//void sheep::get_neareast_animal(std::vector<std::shared_ptr<animal>> animals){
+//}
+
 void sheep::move(){
 
     //bounces on the sides
@@ -81,4 +84,14 @@ void sheep::move(){
               break;
       }
       lastDir = dir; //it saves the last direction
-  }                 
+     
+  }    
+
+
+
+
+//void sheep::get_neareast_wolf(animal* wolfs){
+
+
+
+//}

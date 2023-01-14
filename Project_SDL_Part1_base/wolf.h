@@ -2,12 +2,15 @@
 #define WOLF_H
 
 #include "animal.h"
+
 #include <iostream>
 #include <string>
+
 class wolf : public animal{
 	
 	private: 
 	int lastDir;
+	SDL_Rect nearest_sheep_pos_;
 	
     public:
 
@@ -18,6 +21,9 @@ class wolf : public animal{
 	//they will direct themselves towards the nearest sheep. 
 	//If a wolf does not catch a sheep after a certain period, it will starve and die
 	virtual void move() ;
+
+	void get_neareast_animal(std::vector<std::shared_ptr<animal>> animals);
+
 	
 };
 

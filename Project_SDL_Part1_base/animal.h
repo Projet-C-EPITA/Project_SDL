@@ -6,14 +6,25 @@
 #include <SDL2/SDL_image.h>
 //#include "Project_SDL1.h"
 #include "utility.h"
+
 #include <iostream>
 #include <map>
 #include <memory>
 #include <optional>
 #include <vector>
 
+enum GENDER {
+    MALE,
+    FEMALE
+};
 
-class animal
+enum TYPE{
+	SHEEP, 
+	WOLF, 
+	SHEPERDDOG
+};
+
+class animal 
 {
 	private:
 		// ptr to the surface on which we want the animal to be drawn, also 
@@ -27,9 +38,14 @@ class animal
 		enum eDirection {UPLEFT, UPRIGHT, DOWNRIGHT, DOWNLEFT, UP, DOWN, RIGHT, LEFT};
 		eDirection dir = UPRIGHT; 
 		
-		SDL_Rect pos; //position de l'animal
 	
 	public:
+		
+		GENDER sex;
+		SDL_Rect pos; 
+		TYPE type;
+		//position de l'animal
+		//moving moving_= moving();
 		// todo: The constructor has to load the sdl_surface that corresponds 
 		// to the texture
 		animal(const std::string& file_path, SDL_Surface* window_surface_ptr); 
@@ -46,6 +62,7 @@ class animal
 
 		
 		virtual void move() = 0;
+		//virtual void get_nearest_animal(std::vector<std::shared_ptr<animal>> animals) = 0;
 
 };
 

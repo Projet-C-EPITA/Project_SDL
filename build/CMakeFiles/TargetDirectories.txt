@@ -1,5 +1,0 @@
-/home/cam/Documents/GitHub/Project_SDL/build/CMakeFiles/edit_cache.dir
-/home/cam/Documents/GitHub/Project_SDL/build/CMakeFiles/rebuild_cache.dir
-/home/cam/Documents/GitHub/Project_SDL/build/Project_SDL_Part1_base/CMakeFiles/SDL_part1.dir
-/home/cam/Documents/GitHub/Project_SDL/build/Project_SDL_Part1_base/CMakeFiles/edit_cache.dir
-/home/cam/Documents/GitHub/Project_SDL/build/Project_SDL_Part1_base/CMakeFiles/rebuild_cache.dir

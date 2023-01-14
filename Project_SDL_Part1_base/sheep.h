@@ -4,6 +4,7 @@
 #pragma once
 #include <string>
 #include "animal.h"
+
 //class animal;
 
 class sheep : public animal{
@@ -22,6 +23,8 @@ class sheep : public animal{
 
 	virtual void move() ;
 	
+	// in order to verifie if sheep is too close to a wolf
+	//virtual void get_neareast_animal(std::vector<std::shared_ptr<animal>> animals);
 };
 
 #endif

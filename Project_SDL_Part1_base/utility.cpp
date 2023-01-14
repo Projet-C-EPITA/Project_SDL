@@ -1,5 +1,18 @@
 #include "utility.h"
 
+
+
+
+/*utility::utility(const std::string &file_path, SDL_Surface *window_surface_ptr)
+{
+    window_surface_ptr_ = window_surface_ptr;
+    image_ = load_surface_for(file_path, window_surface_ptr_);
+	if(NULL == image_){
+        fprintf(stderr, "Erreur SDL_LoadBMP : %s", SDL_GetError());
+    }
+
+}*/
+
 void init()
 {
 	// Initialize SDL
