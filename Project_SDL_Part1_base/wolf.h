@@ -12,6 +12,8 @@ class wolf : public animal{
 	private: 
 	int lastDir;
 	SDL_Rect nearest_sheep_pos_;
+	SDL_Rect closest_dog_pos_;
+	bool to_close = false;
 	bool get_Sheep = false;
 	Uint32 m_lastMealTime;
     public:
@@ -25,6 +27,7 @@ class wolf : public animal{
 	virtual void move() ;
 	void time_to_catch();
 	void get_neareast_animal(std::vector<std::shared_ptr<animal>> animals);
+	
 
 	
 };

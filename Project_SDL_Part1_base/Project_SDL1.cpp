@@ -29,7 +29,7 @@ void ground::update(){
 			// Calcule ici le mouton le plus proche pour change la direction du loup
 			if (animal_ptr->type == WOLF){
 				auto wolfs = std::static_pointer_cast<wolf>(animal_ptr);
-				wolfs->get_neareast_animal(ground::animals);
+				wolfs->get_neareast_animal(ground::animals); // TODO :va en meme temps calculer closest dog
 			}
         	animal_ptr->move();
 		}

@@ -12,6 +12,8 @@
 #include <optional>
 #include <vector>
 
+#define DIST_MIN_WOLF 100
+
 enum GENDER {
     MALE,
     FEMALE
@@ -20,7 +22,7 @@ enum GENDER {
 enum TYPE{
 	SHEEP, 
 	WOLF, 
-	SHEPERDDOG
+	DOG
 };
 
 class animal 
