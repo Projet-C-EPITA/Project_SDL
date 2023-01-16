@@ -36,7 +36,7 @@ class animal
 
 	protected:
 		SDL_Surface * image_;
-		enum eDirection {UPLEFT, UPRIGHT, DOWNRIGHT, DOWNLEFT, UP, DOWN, RIGHT, LEFT, UP_BOOST, DOWN_BOOST};
+		enum eDirection {UPLEFT, UPRIGHT, DOWNRIGHT, DOWNLEFT, UP, DOWN, RIGHT, LEFT, RIGHT_BOOST, LEFT_BOOST, UP_BOOST, DOWN_BOOST};
 		eDirection dir = UPRIGHT; 
 		
 	

@@ -12,7 +12,7 @@ class sheep : public animal{
 	private: 
 	int lastDir;
 	SDL_Rect nearest_wolf_pos_;
-	bool to_close = false;
+	bool to_close_sheep = false;
 	
 	public:
 

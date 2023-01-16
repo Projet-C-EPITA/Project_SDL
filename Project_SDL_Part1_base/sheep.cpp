@@ -9,18 +9,23 @@
 void sheep::move(){
 
 // check if wolf near sheep, if yes, go on the opposite direction with a boost
-    if(to_close){
+    if(to_close_sheep == 1){
+        printf("to_close");
         if(pos.x > nearest_wolf_pos_.x || pos.y > nearest_wolf_pos_.y)
-            dir = UP_BOOST;
+            dir = RIGHT_BOOST;
         if(pos.x < nearest_wolf_pos_.x || pos.y < nearest_wolf_pos_.y)
             dir = DOWN_BOOST;
     }
     //bounces on the sides
     else{
-        if (pos.x == 1 || pos.x == frame_width -image_->w) {
+        printf("pos x: %d\n", pos.x);
+        printf("pos y: %d\n", pos.y);
+        printf("%d", lastDir);
+        if (pos.x == 1 || pos.x >= frame_width -image_->w) {
             switch (lastDir) {
             case 0:
-                dir = UPRIGHT;    //this code checks if the sheep is right next to a wall 
+                // dir = UPRIGHT;    //this code checks if the sheep is right next to a wall 
+                dir = DOWNLEFT;   
                 break;                 
             case 1:               
                 dir = UPLEFT;    
@@ -38,7 +43,7 @@ void sheep::move(){
                 dir = RIGHT;
                 break;
             case 8:
-                dir = DOWNLEFT;
+                dir = UPLEFT;
                 break;
             case 9:
                 dir = UPRIGHT;
@@ -47,7 +52,7 @@ void sheep::move(){
             
         }
         //bounces on the top and bottom
-        if (pos.y == 1 || pos.y == frame_height -image_->h) {
+        if (pos.y == 1 || pos.y >= frame_height -image_->h) {
             switch (lastDir) {
             case 0:
                 dir = DOWNLEFT;  //same thing down here but for
@@ -67,6 +72,12 @@ void sheep::move(){
             case 5: 
                 dir = UP;
                 break; 
+            case 10:
+                dir = DOWNRIGHT;
+                break;
+            case 11:
+                dir = UPLEFT;
+                break;
             }
         }
     }
@@ -100,8 +111,14 @@ void sheep::move(){
         case RIGHT:
             pos.y--;
             break;
-        case UP_BOOST:
+        case RIGHT_BOOST:
             pos.x += 2;
+            break;
+        case LEFT_BOOST:
+            pos.x -= 2;
+            break;
+        case UP_BOOST:
+            pos.y -= 2;
             break;
         case DOWN_BOOST:
             pos.y += 2;
@@ -131,11 +148,10 @@ void sheep::get_nearest_wolf(std::vector<std::shared_ptr<animal>> animals){
                 nearest_wolf_pos_ = animal_ptr->pos;
             }
             if (animal_distance < DIST_MIN_WOLF)
-                to_close = true;
+                to_close_sheep = true;
             else{
-                to_close = false;
+                to_close_sheep = false;
             }
-            printf("TO CLOSE: %d\n", to_close);
         }
     }
     
