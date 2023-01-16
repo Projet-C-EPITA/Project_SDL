@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/SDLTest.dir/Main.o -o SDLTest   -L/usr/local/lib  -Wl,-rpath,/usr/local/lib /usr/local/lib/libSDL2.so -lSDL2_image 
