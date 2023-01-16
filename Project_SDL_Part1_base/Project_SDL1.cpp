@@ -6,7 +6,7 @@
 #include <numeric>
 #include <random>
 #include <string>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 
 
@@ -31,11 +31,16 @@ void ground::update(){
 				auto wolfs = std::static_pointer_cast<wolf>(animal_ptr);
 				wolfs->get_neareast_animal(ground::animals); // TODO :va en meme temps calculer closest dog
 			}
+			if (animal_ptr->type == SHEEP){
+				auto sheeps = std::static_pointer_cast<sheep>(animal_ptr);
+				sheeps->get_nearest_wolf(ground::animals);
+			}
         	animal_ptr->move();
 		}
 		// Clear the screen
 		SDL_FillRect(window_surface_ptr_, nullptr ,SDL_MapRGB(window_surface_ptr_->format, 0, 255, 0));
 		// Draw all animals
+		SDL_Delay(15);
 		for (auto &animal_ptr : animals){
 			//Ne marche pas encore mais verifie si l'animal est toujours en vie sinon pouf il disparait
 			if (!animal_ptr->isalive) {

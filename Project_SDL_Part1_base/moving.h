@@ -8,7 +8,7 @@
 #include "utility.h"
 
 
-enum eDirection {UPLEFT, UPRIGHT, DOWNRIGHT, DOWNLEFT, UP, DOWN, RIGHT, LEFT};
+enum eDirection {UPLEFT, UPRIGHT, DOWNRIGHT, DOWNLEFT, UP, DOWN, RIGHT, LEFT, UP_BOOST, DOWN_BOOST};
 
 class moving{
     

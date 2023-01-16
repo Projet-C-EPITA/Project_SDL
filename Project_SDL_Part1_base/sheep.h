@@ -11,6 +11,8 @@ class sheep : public animal{
 	
 	private: 
 	int lastDir;
+	SDL_Rect nearest_wolf_pos_;
+	bool to_close = false;
 	
 	public:
 
@@ -22,6 +24,7 @@ class sheep : public animal{
 	//they can produce an offspring 
 
 	virtual void move() ;
+	void get_nearest_wolf(std::vector<std::shared_ptr<animal>> animals);
 	
 	// in order to verifie if sheep is too close to a wolf
 	//virtual void get_neareast_animal(std::vector<std::shared_ptr<animal>> animals);
