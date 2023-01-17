@@ -7,145 +7,125 @@
 #include <random>
 #include <string>
 #include <SDL.h>
-#include "animal.h"
-#include "wolf.h"
-#include "sheep.h"
 
+//---------------------------------------Partie Ground -----------------------------------------
 
-void init()
+ground::ground(SDL_Surface *window_surface_ptr)
 {
-	// Initialize SDL
-	if (SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0)
-		throw std::runtime_error("init():" + std::string(SDL_GetError()));
-
-	// Initialize PNG loading
-	int imgFlags = IMG_INIT_PNG;
-	if (!(IMG_Init(imgFlags) & imgFlags))
-		throw std::runtime_error("init(): SDL_image could not Initialize! "
-								 "SDL_image Error: " + 
-								 std::string(IMG_GetError()));
-	/*Rajout pour ouvrir la fenêtre*/
-	
+	window_surface_ptr_ = window_surface_ptr;
 }
 
-	
-	
+void ground::add_animal(const std::shared_ptr<animal> &animal)
+{
+	animals.push_back(animal);
+}
 
+void ground::update()
+{
 
-namespace {
-	// Defining a namespace without a name -> Anonymous workspace
-	// Its purpose is to indicate to the compiler that everything
-	// inside of it is UNIQUELY used within this source file
-	
-	SDL_Surface* load_surface_for(const std::string& path, 
-								  SDL_Surface* window_surface_ptr)
+	for (auto &animal_ptr : animals)
 	{
-		// Helper function to load a png for a specific surface
-		// See SDL_ConvertSurface
-		if (!window_surface_ptr){
-			std::cout << "Error : window surface ptr is invalid" << std::endl;
-			return (nullptr);
+		// Calcule ici le mouton le plus proche pour change la direction du loup
+		if (animal_ptr->type == WOLF)
+		{
+			auto wolfs = std::static_pointer_cast<wolf>(animal_ptr);
+			wolfs->get_neareast_animal(ground::animals); // TODO :va en meme temps calculer closest dog
 		}
-
-		window_surface_ptr = SDL_ConvertSurface(IMG_Load(path.c_str()), window_surface_ptr->format, 0);
-		if (!window_surface_ptr){
-			std::cout << "Error during creation of surface." << std::endl;
-			return (nullptr);
-		}
-
-		return window_surface_ptr;
+		animal_ptr->move();
 	}
-		
+	// Clear the screen
+	SDL_FillRect(window_surface_ptr_, nullptr, SDL_MapRGB(window_surface_ptr_->format, 0, 255, 0));
+	// Draw all animals
+	for (auto &animal_ptr : animals)
+	{
+		// Ne marche pas encore mais verifie si l'animal est toujours en vie sinon pouf il disparait
+		if (!animal_ptr->isalive)
+		{
+			animal_ptr.reset(); // releases the resource and free the memory
+		}
+		animal_ptr->draw();
+	}
 }
-	
-	application::application(unsigned n_sheep, unsigned n_wolf){
-		
-		Nsheep = n_sheep;
-		Nwolf = n_wolf;
-		createWindow();		
 
-		/*this->window_ptr_ = SDL_CreateWindow("Jeu EPITA CPP", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, frame_width, frame_height, 0);
-		// On récupère la surface
-		this->window_surface_ptr_ = SDL_GetWindowSurface(this->window_ptr_);
-		// On charge les moutons
-		for (int i = 0; i < n_sheep; i++) {
-			std::unique_ptr<Animal> sheep = std::make_unique<Sheep>(this->window_surface_ptr_);
-			this->playing_ground->add_character(std::move(sheep));
-		}
-		// On charge les loups
-		for (int i = 0; i < n_wolf; i++) {
-			std::unique_ptr<Animal> wolf = std::make_unique<Wolf>(this->window_surface_ptr_);
-			this->playing_ground->add_character(std::move(wolf));
-		}
-			*/
+// ---------------------------------------------Partie Application --------------------------------
+
+application::application(unsigned n_sheep, unsigned n_wolf)
+{
+
+	Nsheep = n_sheep;
+	Nwolf = n_wolf;
+	createWindow();
+	ground_ = std::make_unique<ground>(window_surface_ptr_);
+
+	// TODO : faire une rand avec l'enum sex du sheep (male,female)
+	for (int i = 0; i < Nsheep; ++i)
+	{
+		std::shared_ptr<sheep> sheeps = std::make_shared<sheep>(file_path_sheep, window_surface_ptr_);
+		ground_->add_animal(sheeps);
+		sheeps->draw();
+		sheeps->type = SHEEP;
 	}
 
-	application::~application(){
+	for (int i = 0; i < Nwolf; ++i)
+	{
+		std::shared_ptr<wolf> wolfs = std::make_shared<wolf>(file_path_wolf, window_surface_ptr_);
+		ground_->add_animal(wolfs);
+		wolfs->draw();
+		wolfs->type = WOLF;
+	}
+}
+
+application::~application()
+{
+	SDL_DestroyWindow(window_ptr_);
+	std::cout << "Window destroy\n";
+
+	IMG_Quit();
+	SDL_Quit();
+}
+
+void application::createWindow()
+{
+	window_ptr_ = SDL_CreateWindow("Game SDL", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, frame_width, frame_height, SDL_WINDOW_SHOWN);
+	std::cout << "window created\n";
+	if (window_ptr_ == nullptr)
+	{
+		SDL_Log("Could not create a window: %s", SDL_GetError());
+	}
+	window_renderer_ = SDL_CreateRenderer(window_ptr_, -1, SDL_RENDERER_ACCELERATED);
+	if (window_renderer_ == nullptr)
+	{
+		SDL_Log("Could not create a renderer: %s", SDL_GetError());
+	}
+
+	window_surface_ptr_ = SDL_GetWindowSurface(window_ptr_);
+	if (window_surface_ptr_ == nullptr)
+	{
 		SDL_DestroyWindow(window_ptr_);
-		std::cout << "Window destroy\n";
+		SDL_Log("Could not create a window: %s", SDL_GetError());
 	}
+	SDL_FillRect(window_surface_ptr_, nullptr, SDL_MapRGB(window_surface_ptr_->format, 0, 255, 0));
+}
 
-	void application::createWindow(){
-		window_ptr_ = SDL_CreateWindow("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, frame_width, frame_height, SDL_WINDOW_SHOWN);
-		std::cout <<"window created\n";
-		if (window_ptr_ == nullptr) {
-			SDL_Log("Could not create a window: %s", SDL_GetError());
+int application::loop(unsigned period)
+{
+	while (SDL_GetTicks() < (period * 1000) && is_open)
+	{
+		SDL_PollEvent(&window_event_);
+		switch (window_event_.type)
+		{
+		case SDL_QUIT:
+			is_open = false;
+			break;
 		}
-		window_renderer_ = SDL_CreateRenderer(window_ptr_, -1, SDL_RENDERER_ACCELERATED);
-		if (window_renderer_ == nullptr) {
-			SDL_Log("Could not create a renderer: %s", SDL_GetError());
-		}
-
-		window_surface_ptr_ =  SDL_GetWindowSurface(window_ptr_);
-		if (window_surface_ptr_ == nullptr){
-			SDL_DestroyWindow(window_ptr_);
-			SDL_Log("Could not create a window: %s", SDL_GetError());
-		}
-		SDL_FillRect(window_surface_ptr_, nullptr, SDL_MapRGB(window_surface_ptr_->format, 0, 255, 0));
-
-		
-	}
-	
-/*Ne s'eteint pas au bout d'un certain delai mais quand on quitte avec la croix*/
-	int application::loop(unsigned period){
-		animal wolf("../../media/wolf.png", window_surface_ptr_);
-		wolf.draw(window_renderer_, window_surface_ptr_, "../../media/wolf.png");
-
+		ground_->update();
 		SDL_UpdateWindowSurface(window_ptr_);
-		while(SDL_GetTicks() < (period*1000) && is_open){
-			SDL_PollEvent(&window_event_);
-			switch (window_event_.type) {
-				case SDL_QUIT:
-					is_open = false;
-					break;
-			}
-		}		
-		
-		//A mettre dans le dtor de app
-		SDL_DestroyRenderer(window_renderer_);
-		SDL_DestroyWindow(window_ptr_);
-		SDL_Quit();
-		
-		return period;
 	}
 
-	ground::ground(SDL_Surface* window_surface_ptr){
-		//TODO
-	}
+	// A mettre dans le dtor de app
+	SDL_DestroyRenderer(window_renderer_);
+	SDL_DestroyWindow(window_ptr_);
+	SDL_Quit();
 
-	// en parametre les remplacer avec le type d'animal qu'on appelera et mettra le file correspondant
-	void ground::add_animal(){
-		/*string file_path;
-		if(type == "sheep")
-			file_path = "sheep.png";
-		else if(type == "wolf")
-			file_path = "wolf.png";
-		animal animal = new animal(file_path, ground);
-		update(animal);
-		//animal::animal(file_path, window_surface_ptr);
-*/
-	}// ici utiliser les smart pointeur pour ajouter l'animal
-
-	void ground::update(){
-		//	animal.draw(animal.filepath, ground);
-	}
+	return period;
+}
