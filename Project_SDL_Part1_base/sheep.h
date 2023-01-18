@@ -13,6 +13,7 @@ class sheep : public animal{
 	int lastDir;
 	SDL_Rect nearest_wolf_pos_;
 	bool to_close_sheep = false;
+	int speed = 1;
 	
 	public:
 

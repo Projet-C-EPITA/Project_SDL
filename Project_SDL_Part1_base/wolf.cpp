@@ -18,6 +18,7 @@ void wolf::get_neareast_animal(std::vector<std::shared_ptr<animal>> animals){
             animal_distance = sqrt(pow(animal_distance_x, 2) + pow(animal_distance_y, 2));
             if (neareast > animal_distance){
                 neareast = animal_distance;
+                nearest_sheep = animal_ptr;
                 nearest_sheep_pos_ = animal_ptr->pos;
             }
         }
@@ -98,10 +99,10 @@ void wolf::move() {
  * ne marche pas encore !!
 */
 void wolf::time_to_catch(){
-    if (nearest_sheep_pos_.x == pos.x && nearest_sheep_pos_.y== pos.y){
+    if ((nearest_sheep_pos_.x - pos.x == pos.x || (nearest_sheep_pos_.x - 1 == pos.x) || (nearest_sheep_pos_.x + 1 == pos.x)) && (nearest_sheep_pos_.y== pos.y || (nearest_sheep_pos_.y -1) == pos.y ||(nearest_sheep_pos_.y +1) == pos.y)){
         get_Sheep = true;
         m_lastMealTime = SDL_GetTicks();
-        
+        nearest_sheep->isalive = false;
     }
 
     Uint32 elapsedTime = SDL_GetTicks() - m_lastMealTime;

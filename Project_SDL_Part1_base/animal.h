@@ -12,7 +12,7 @@
 #include <optional>
 #include <vector>
 
-#define DIST_MIN_WOLF 100
+#define DIST_MIN_WOLF 130
 
 enum GENDER {
     MALE,
