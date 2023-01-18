@@ -21,6 +21,7 @@ constexpr unsigned frame_boundary = 100;
 
 constexpr char file_path_sheep[] = "../../media/sheep.png"; 
 constexpr char file_path_wolf[] = "../../media/wolf.png"; 
+constexpr char file_path_shepherd[] = "../../media/shepherd.png"; 
 
 // Helper function to initialize SDL
 

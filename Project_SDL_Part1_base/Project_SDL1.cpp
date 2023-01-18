@@ -23,6 +23,10 @@ void ground::add_animal(const std::shared_ptr<animal>& animal){
 		 
 }
 
+void ground::add_shepherd(const std::shared_ptr<shepherd>& shepherd){
+	shepherds.push_back(shepherd);
+}
+
 void ground::update(){
 		
 		for (auto &animal_ptr : animals){
@@ -32,6 +36,9 @@ void ground::update(){
 				wolfs->get_neareast_animal(ground::animals); // TODO :va en meme temps calculer closest dog
 			}
         	animal_ptr->move();
+		}
+		for(auto &shep : shepherds){
+			shep->move();
 		}
 		// Clear the screen
 		SDL_FillRect(window_surface_ptr_, nullptr ,SDL_MapRGB(window_surface_ptr_->format, 0, 255, 0));
@@ -43,6 +50,10 @@ void ground::update(){
 			}
 			animal_ptr->draw();	
 		}
+		for(auto &shep : shepherds){
+			shep->draw();
+		}
+		
 			
 		
 }
@@ -71,10 +82,12 @@ void ground::update(){
 			std::shared_ptr<wolf> wolfs =std::make_shared<wolf>(file_path_wolf, window_surface_ptr_);
 			ground_->add_animal(wolfs);
 			wolfs->draw();
-			wolfs->type = WOLF;
-			
-			
+			wolfs->type = WOLF;			
 		}
+		std::shared_ptr<shepherd> shepherd1 = std::make_shared<shepherd>(file_path_shepherd, window_surface_ptr_);
+		ground_->add_shepherd(shepherd1);
+		shepherd1->draw();
+		
 	}	
 
 	application::~application(){
@@ -126,7 +139,3 @@ void ground::update(){
 		
 		return period;
 	}
-
-	
-
-	

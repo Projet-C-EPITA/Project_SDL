@@ -4,6 +4,7 @@
 #include "animal.h"
 #include "wolf.h"
 #include "sheep.h"
+#include "shepherd.h"
 #include "utility.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -25,7 +26,9 @@ class ground
 		// Some attribute to store all the wolves and sheep here
 	
 	public:
+		// le mieux à faire aurait ete uene class object et on aurait reuni les deux parties ensemble
 		std::vector<std::shared_ptr<animal>> animals;
+		std::vector<std::shared_ptr<shepherd>> shepherds;
 		// todo: Ctor
 		ground(SDL_Surface* window_surface_ptr);
 
@@ -33,6 +36,7 @@ class ground
 		~ground(){};
 
 		void add_animal(const std::shared_ptr<animal>& animal); 
+		void add_shepherd(const std::shared_ptr<shepherd>& shepherd); 
 
 		// todo: Refresh the screen : Move animals and draw them (method of animal)
 		void update();
