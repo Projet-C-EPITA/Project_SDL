@@ -9,19 +9,58 @@
 void sheep::move(){
 
 // check if wolf near sheep, if yes, go on the opposite direction with a boost
-    if(to_close_sheep == 1){
-        printf("to_close");
-        if(pos.x > nearest_wolf_pos_.x || pos.y > nearest_wolf_pos_.y)
-            dir = RIGHT_BOOST;
-        if(pos.x < nearest_wolf_pos_.x || pos.y < nearest_wolf_pos_.y)
-            dir = DOWN_BOOST;
+    if(to_close_sheep == 1 && pos.x != 1 && (pos.x - 1) < frame_width -image_->w && pos.y != 1 && (pos.y -1) < frame_height -image_->h){
+        // if(to_close_sheep == 1){
+        // if(pos.x > nearest_wolf_pos_.x && (pos.y == nearest_wolf_pos_.y || pos.y - 1 == nearest_wolf_pos_.y || pos.y + 1 == nearest_wolf_pos_.y))
+        //test si le loup est à gauche du sheep
+        if(pos.x > nearest_wolf_pos_.x)
+            //si loup au même niveau que le sheep sur y
+            if(pos.y == nearest_wolf_pos_.y || pos.y - 1 == nearest_wolf_pos_.y || pos.y + 1 == nearest_wolf_pos_.y)
+                dir = RIGHT_BOOST;
+            //si le loup en bas du sheep en y
+            else if(pos.y > nearest_wolf_pos_.y)
+                dir = DOWNRIGHT_BOOST;
+            //si le loup en haut du sheep en y
+            else
+                dir = UPRIGHT_BOOST; 
+
+        //test si le loup est à droite du sheep
+        if(pos.x < nearest_wolf_pos_.x)
+            //si loup au même niveau que le sheep sur y
+            if(pos.y == nearest_wolf_pos_.y|| pos.y - 1 == nearest_wolf_pos_.y || pos.y + 1 == nearest_wolf_pos_.y)
+                dir = LEFT_BOOST;
+            //si le loup en bas du sheep en y
+            else if(pos.y > nearest_wolf_pos_.y)
+                dir = DOWNLEFT_BOOST;
+            //si le loup en haut du sheep en y
+            else
+                dir = UPLEFT_BOOST;  
+
+        //test si le loup est sur la même ligne que le sheep en x
+        if(pos.x == nearest_wolf_pos_.x)
+            //si le loup est en bas du sheep en y
+            if(pos.y > nearest_wolf_pos_.y)
+                dir = DOWN_BOOST;
+            //si le loup est en haut du sheep en y
+            else
+                dir = UP_BOOST;
+        // // if(pos.y > nearest_wolf_pos_.x && (pos.x == nearest_wolf_pos_.x || pos.x - 1 == nearest_wolf_pos_.x || pos.x + 1 == nearest_wolf_pos_.x))
+        // //     dir = DOWN_BOOST;
+        // if(pos.x < nearest_wolf_pos_.x && (pos.y == nearest_wolf_pos_.y || pos.y - 1 == nearest_wolf_pos_.y || pos.y + 1 == nearest_wolf_pos_.y))
+        //     dir = LEFT_BOOST;
+        // if(pos.y < nearest_wolf_pos_.x && (pos.y == nearest_wolf_pos_.y || pos.y - 1 == nearest_wolf_pos_.y || pos.y + 1 == nearest_wolf_pos_.y))
+        //     dir = UP_BOOST;
+
+        // if(pos.x > nearest_wolf_pos_.x || pos.y > nearest_wolf_pos_.y)
+        //     dir = RIGHT_BOOST;
+        // if(pos.x < nearest_wolf_pos_.x || pos.y < nearest_wolf_pos_.y)
+        //     dir = DOWN_BOOST;
+
+            
     }
     //bounces on the sides
     else{
-        printf("pos x: %d\n", pos.x);
-        printf("pos y: %d\n", pos.y);
-        printf("%d", lastDir);
-        if (pos.x == 1 || pos.x >= frame_width -image_->w) {
+        if (pos.x == 1 || (pos.x - 1) >= frame_width -image_->w) {
             switch (lastDir) {
             case 0:
                 // dir = UPRIGHT;    //this code checks if the sheep is right next to a wall 
@@ -48,11 +87,23 @@ void sheep::move(){
             case 9:
                 dir = UPRIGHT;
                 break;
+            case 12:
+                dir = UPRIGHT;
+                break;
+            case 13:
+                dir = UPLEFT;
+                break;
+            case 14:
+                dir = DOWNLEFT;
+                break;
+            case 15:
+                dir = DOWNRIGHT;
+                break;
             }
             
         }
         //bounces on the top and bottom
-        if (pos.y == 1 || pos.y >= frame_height -image_->h) {
+        if (pos.y == 1 || (pos.y -1) >= frame_height -image_->h) {
             switch (lastDir) {
             case 0:
                 dir = DOWNLEFT;  //same thing down here but for
@@ -78,6 +129,18 @@ void sheep::move(){
             case 11:
                 dir = UPLEFT;
                 break;
+            case 12:
+                dir = DOWNLEFT;
+                break;
+            case 13:
+                dir = DOWNRIGHT;
+                break;
+            case 14:
+                dir = UPRIGHT_BOOST;
+                break;
+            case 15:
+                dir = UPLEFT;
+                break;
             }
         }
     }
@@ -91,12 +154,12 @@ void sheep::move(){
             pos.x++;
             pos.y--;
             break;
-        case DOWNLEFT:
-            pos.x--;
-            pos.y++;
-            break;
         case DOWNRIGHT:
             pos.x++;
+            pos.y++;
+            break;
+        case DOWNLEFT:
+            pos.x--;
             pos.y++;
             break;
         case UP:
@@ -105,11 +168,11 @@ void sheep::move(){
         case DOWN:
             pos.x--;
             break;
-        case LEFT:
-            pos.y++;
-            break;
         case RIGHT:
             pos.y--;
+            break;
+        case LEFT:
+            pos.y++;
             break;
         case RIGHT_BOOST:
             pos.x += 2;
@@ -123,6 +186,23 @@ void sheep::move(){
         case DOWN_BOOST:
             pos.y += 2;
             break;
+        case UPLEFT_BOOST:
+            pos.x -= 2;
+            pos.y -= 2;
+            break;
+        case UPRIGHT_BOOST:
+            pos.x += 2;
+            pos.y -= 2;
+            break;
+        case DOWNRIGHT_BOOST:
+            pos.x += 2;
+            pos.y += 2;
+            break;
+        case DOWNLEFT_BOOST:
+            pos.x -= 2;
+            pos.y += 2;
+            break;
+
     }
     lastDir = dir; //it saves the last direction
      
