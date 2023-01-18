@@ -24,7 +24,7 @@ void ground::add_animal(const std::shared_ptr<animal>& animal){
 }
 
 void ground::update(){
-		
+		int new_sheeps = 0;
 		for (auto &animal_ptr : animals){
 			// Calcule ici le mouton le plus proche pour change la direction du loup
 			if (animal_ptr->type == WOLF){
@@ -34,9 +34,19 @@ void ground::update(){
 			if (animal_ptr->type == SHEEP){
 				auto sheeps = std::static_pointer_cast<sheep>(animal_ptr);
 				sheeps->get_nearest_wolf(ground::animals);
+				if(sheeps->offspring == true){
+					new_sheeps++;
+				}
 			}
         	animal_ptr->move();
 		}
+
+		// for(int i = 0; i < new_sheeps; i++){
+			
+		// 	std::shared_ptr<sheep> new_sheep = std::make_shared<sheep>(file_path_sheep, window_surface_ptr_);
+		// 	animals.reset();
+		// 	animals.push_back(new_sheep);
+		// }
 		// Clear the screen
 		SDL_FillRect(window_surface_ptr_, nullptr ,SDL_MapRGB(window_surface_ptr_->format, 0, 255, 0));
 		// Draw all animals
@@ -63,8 +73,7 @@ void ground::update(){
 		Nwolf = n_wolf;
 		createWindow();	
 		ground_ = std::make_unique<ground>(window_surface_ptr_);
-	
-		// TODO : faire une rand avec l'enum sex du sheep (male,female)
+
 		for (int i = 0; i < Nsheep; ++i) {
 			std::shared_ptr<sheep> sheeps = std::make_shared<sheep>(file_path_sheep, window_surface_ptr_);
 			ground_->add_animal(sheeps);
@@ -80,7 +89,7 @@ void ground::update(){
 			
 			
 		}
-	}	
+	}
 
 	application::~application(){
 		SDL_DestroyWindow(window_ptr_);
