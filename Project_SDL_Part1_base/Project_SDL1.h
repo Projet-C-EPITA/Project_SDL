@@ -29,6 +29,7 @@ class ground
 		// le mieux à faire aurait ete uene class object et on aurait reuni les deux parties ensemble
 		std::vector<std::shared_ptr<animal>> animals;
 		std::vector<std::shared_ptr<shepherd>> shepherds;
+		int scoreF;
 		// todo: Ctor
 		ground(SDL_Surface* window_surface_ptr);
 
@@ -64,6 +65,7 @@ class application
 		std::unique_ptr<ground> ground_;
 		
 	public:
+		
 		// Ctor
 		application(unsigned n_sheep, unsigned n_wolf);
 

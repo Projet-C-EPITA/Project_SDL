@@ -13,7 +13,6 @@ shepherd::shepherd(const std::string &file_path, SDL_Surface *window_surface_ptr
 
     pos_s.x = rand() % frame_width - image_->w; // pos_s_sition aleatoire du joueur
     pos_s.y = rand() % frame_height - image_->h;
-    printf("pos_xshepehrd:%d", pos_s.x);
     pos_s.w = image_->w;
     pos_s.h = image_->h;
 }
@@ -60,13 +59,13 @@ void shepherd::move()
     }
     else{
         // WSAD  & UP/DOWN/LEFT/RIGHT arrow
-        if (keyboard_state_array[SDL_SCANCODE_Z] || keyboard_state_array[SDL_SCANCODE_UP])
+        if (keyboard_state_array[SDL_SCANCODE_UP])
             pos_s.y -= 1;
-        if (keyboard_state_array[SDL_SCANCODE_S] || keyboard_state_array[SDL_SCANCODE_DOWN])
+        if (keyboard_state_array[SDL_SCANCODE_DOWN])
             pos_s.y += 1;
-        if (keyboard_state_array[SDL_SCANCODE_Q] || keyboard_state_array[SDL_SCANCODE_LEFT])
+        if ( keyboard_state_array[SDL_SCANCODE_LEFT])
             pos_s.x -= 1;
-        if (keyboard_state_array[SDL_SCANCODE_D] || keyboard_state_array[SDL_SCANCODE_RIGHT])
+        if (keyboard_state_array[SDL_SCANCODE_RIGHT])
             pos_s.x += 1;
     }
 }

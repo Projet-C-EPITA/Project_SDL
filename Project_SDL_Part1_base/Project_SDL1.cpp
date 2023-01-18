@@ -47,6 +47,8 @@ void ground::update(){
 			//Ne marche pas encore mais verifie si l'animal est toujours en vie sinon pouf il disparait
 			if (!animal_ptr->isalive) {
 				animal_ptr.reset();// releases the resource and free the memory
+				if (animal_ptr->type == SHEEP)
+					scoreF--;
 			}
 			animal_ptr->draw();	
 		}
@@ -69,7 +71,7 @@ void ground::update(){
 		Nwolf = n_wolf;
 		createWindow();	
 		ground_ = std::make_unique<ground>(window_surface_ptr_);
-	
+		ground_->scoreF = n_sheep;
 		// TODO : faire une rand avec l'enum sex du sheep (male,female)
 		for (int i = 0; i < Nsheep; ++i) {
 			std::shared_ptr<sheep> sheeps = std::make_shared<sheep>(file_path_sheep, window_surface_ptr_);
@@ -136,6 +138,8 @@ void ground::update(){
 		SDL_DestroyRenderer(window_renderer_);
 		SDL_DestroyWindow(window_ptr_);
 		SDL_Quit();
+		
+		std::cout << "The score of the application is: " << ground_->scoreF << std::endl;
 		
 		return period;
 	}

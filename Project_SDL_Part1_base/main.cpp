@@ -22,7 +22,9 @@ int main(int argc, char* argv[])
 
 	int retval = application.loop(std::stoul(argv[3]));
 
-	//std::cout << "Exiting application with code " << retval << std::endl;
+	std::cout << "Exiting application with code " << retval << std::endl;
+
+	//std::cout << "The score of the application is: " << application->scoreF << std::endl;
 
 	SDL_Quit();
 
