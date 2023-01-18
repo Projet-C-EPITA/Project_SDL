@@ -26,6 +26,18 @@ public:
     long speed;
     bool alive; // If true alive else die
 
+    float x;
+    float y;
+    int dirX;
+    int dirY;
+
+    int getX();
+    int getY();
+    void setX(int x);
+    void setY(int y);
+    int getDirX();
+    int getDirY();
+
     SDL_Surface *window_surface_ptr_;
     SDL_Surface *image_;
 
@@ -37,4 +49,4 @@ public:
     int get_position();
 };
 
-#endif
+#endif // MOVING_H

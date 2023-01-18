@@ -18,6 +18,7 @@ protected:
 
 public:
     SDL_Rect pos;
+    SDL_Event *action;
     /*
         SDL_Surface* get_image_ptr();
     */
