@@ -202,9 +202,11 @@ int application::loop(unsigned period)
             break;
         }
         unsigned nb_sheep = ground_->update();
-        if (nb_sheep == 1)
-            Nsheep++;
-        ground_->scoreF++;
+        if (nb_sheep == 1){
+			Nsheep++;
+        	ground_->scoreF++;
+		}
+            
         SDL_UpdateWindowSurface(window_ptr_);
         //*2 to avoid too many children at once, reset the count every 2 loops
         if (count == Nsheep * 2)
