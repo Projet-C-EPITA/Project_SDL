@@ -51,7 +51,7 @@ void wolf::get_neareast_animal(std::vector<std::shared_ptr<animal>> animals){
  **/
 void wolf::move() {
     is_get_sheep();
-    
+
     // SI un chien est trop proche alors le loup s'en eloigne
     if (to_close){
         if (pos.x > closest_dog_pos_.x )
@@ -123,7 +123,7 @@ void wolf::is_get_sheep(){
     (nearest_sheep_pos_.x - 1 == pos.x) || (nearest_sheep_pos_.x + 1 == pos.x) || (nearest_sheep_pos_.x + 2 == pos.x) || (nearest_sheep_pos_.x - 2 == pos.x)) 
     && (nearest_sheep_pos_.y == pos.y || (nearest_sheep_pos_.y -1) == pos.y ||(nearest_sheep_pos_.y +1) == pos.y || (nearest_sheep_pos_.y -2) == pos.y ||(nearest_sheep_pos_.y +2) == pos.y)){
         get_Sheep = true;
-        isalive = false;
+        nearest_sheep->isalive = false;
 
 
     }
