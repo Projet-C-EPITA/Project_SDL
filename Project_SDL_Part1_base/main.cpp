@@ -1,32 +1,32 @@
-#include "Project_SDL1.h"
 #include <stdio.h>
 #include <string>
 
+#include "Project_SDL1.h"
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-	std::cout << "Starting up the application" << std::endl;
+    std::cout << "Starting up the application" << std::endl;
 
-	if (argc != 4)
-		throw std::runtime_error("Need three arguments - "
-								"number of sheep, number of wolves, "
-								"simulation time\n");
-	
-	init();
+    if (argc != 4)
+        throw std::runtime_error("Need three arguments - "
+                                 "number of sheep, number of wolves, "
+                                 "simulation time\n");
 
-	std::cout << "Done with initialization" << std::endl;
+    init();
 
-	application application(std::stoul(argv[1]), std::stoul(argv[2]));
-	
-	std::cout << "Created window" << std::endl;
+    std::cout << "Done with initialization" << std::endl;
 
-	int retval = application.loop(std::stoul(argv[3]));
+    application application(std::stoul(argv[1]), std::stoul(argv[2]));
 
-	std::cout << "Exiting application with code " << retval << std::endl;
+    std::cout << "Created window" << std::endl;
 
-	//std::cout << "Exiting application with code " << retval << std::endl;
+    int retval = application.loop(std::stoul(argv[3]));
 
-	SDL_Quit();
+    std::cout << "Exiting application with code " << retval << std::endl;
 
-	return 0;
+    // std::cout << "Exiting application with code " << retval << std::endl;
+
+    SDL_Quit();
+
+    return 0;
 }

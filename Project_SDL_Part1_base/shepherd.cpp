@@ -1,13 +1,7 @@
-#include "sheperd.h"
+#include "shepherd.h"
 
-/**
- * @summary  This function is the constructor of sheperd it load the image of the sheperd 
- * and set a random position for the object
- * @param {file_path} : string of the name of the path of the file
- * @param {*window_surface_ptr} : is a pointer to an SDL_Surface object that represents 
- *        the surface of the window. Where the image will be drawn on screen.
-*/
-sheperd::sheperd(const std::string &file_path, SDL_Surface *window_surface_ptr)
+
+shepherd::shepherd(const std::string &file_path, SDL_Surface *window_surface_ptr)
 {
     // On charge l'image du berger
     window_surface_ptr_ = window_surface_ptr;
@@ -24,7 +18,7 @@ sheperd::sheperd(const std::string &file_path, SDL_Surface *window_surface_ptr)
 }
 
 
-void sheperd::move()
+void shepherd::move()
 {
     const Uint8 *keyboard_state_array = SDL_GetKeyboardState(NULL);
     SDL_PollEvent(action_);
@@ -63,7 +57,7 @@ void sheperd::move()
         if ( keyboard_state_array[SDL_SCANCODE_RIGHT])
             pos_s.x += 1;
     }
-    // The sheperd don't touch any edge
+    // The shepherd don't touch any edge
     else{
         if (keyboard_state_array[SDL_SCANCODE_UP])
             pos_s.y -= 1;
@@ -76,19 +70,19 @@ void sheperd::move()
     }
 }
 
-void sheperd::draw()
+void shepherd::draw()
 {
     SDL_BlitSurface(image_, NULL, window_surface_ptr_, &pos_s);
     
 }
 
-void sheperd::set_Event(SDL_Event *ev)
+void shepherd::set_Event(SDL_Event *ev)
 {
     action_ = ev;
 }
 
 
-sheperd::~sheperd()
+shepherd::~shepherd()
 {
     SDL_FreeSurface(image_);
 }
