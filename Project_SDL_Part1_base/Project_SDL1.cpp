@@ -43,15 +43,18 @@ void ground::update(){
 		// Clear the screen
 		SDL_FillRect(window_surface_ptr_, nullptr ,SDL_MapRGB(window_surface_ptr_->format, 0, 255, 0));
 		// Draw all animals
-		for (auto &animal_ptr : animals){
-			//Ne marche pas encore mais verifie si l'animal est toujours en vie sinon pouf il disparait
-			if (!animal_ptr->isalive) {
-				animal_ptr.reset();// releases the resource and free the memory
-				if (animal_ptr->type == SHEEP)
+		
+		for (int i = 0 ; i <animals.size(); i++){
+			if (!animals[i]->isalive) {
+				animals.erase(animals.begin() + i--);
+				// Score marche pas
+				if (animals[i]->type == SHEEP)
 					scoreF--;
 			}
-			animal_ptr->draw();	
+		
+			animals[i]->draw();	
 		}
+		
 		for(auto &shep : shepherds){
 			shep->draw();
 		}
@@ -59,8 +62,6 @@ void ground::update(){
 			
 		
 }
-
-	
 
 
 // ---------------------------------------------Partie Application --------------------------------
@@ -140,6 +141,6 @@ void ground::update(){
 		SDL_Quit();
 		
 		std::cout << "The score of the application is: " << ground_->scoreF << std::endl;
-		
+
 		return period;
 	}

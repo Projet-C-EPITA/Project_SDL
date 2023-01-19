@@ -19,18 +19,15 @@
 class ground
 {
 	private:
-		// Attention, non-owning ptr, again to the screen
 		SDL_Surface* window_surface_ptr_;
 	
-		
-		// Some attribute to store all the wolves and sheep here
 	
 	public:
-		// le mieux à faire aurait ete uene class object et on aurait reuni les deux parties ensemble
+
 		std::vector<std::shared_ptr<animal>> animals;
 		std::vector<std::shared_ptr<shepherd>> shepherds;
 		int scoreF;
-		// todo: Ctor
+	
 		ground(SDL_Surface* window_surface_ptr);
 
 		// todo: Dtor, again for clean up (if necessary)
@@ -39,12 +36,10 @@ class ground
 		void add_animal(const std::shared_ptr<animal>& animal); 
 		void add_shepherd(const std::shared_ptr<shepherd>& shepherd); 
 
-		// todo: Refresh the screen : Move animals and draw them (method of animal)
 		void update();
 		
-		// Possibly other methods, depends on your implementation
+		
 };
-
 
 
 // The application class, which is in charge of generating the window
@@ -61,12 +56,13 @@ class application
 		unsigned int lastTime = 0, currentTime;
 		bool is_open{ true };
 		
-		// Other attributes here, for exemple an instance of ground
+	
 		std::unique_ptr<ground> ground_;
 		
 	public:
 		
 		// Ctor
+		
 		application(unsigned n_sheep, unsigned n_wolf);
 
 		// Dtor
@@ -75,10 +71,12 @@ class application
 
 		void createWindow();
 		
-		// Main loop of the application. This ensures that the screen is 
-		// updated at the correct rate. See SDL_GetTicks() and SDL_Delay() to 
-		// enforce a duration the application should terminate after 'period' 
-		// seconds.
+		/**
+		 * @summary: Main loop of the application. This ensures that the screen is 
+		 * updated at the correct rate. See SDL_GetTicks() and SDL_Delay() to 
+		 * enforce a duration the application should terminate after 'period' seconds.
+		 * @param {period}: Correspond to the time in ms that the Application will be open.
+		*/
 		int loop(unsigned period);
 		
 };

@@ -49,7 +49,7 @@ void wolf::get_neareast_animal(std::vector<std::shared_ptr<animal>> animals){
  * mais en evitant les chiens du bergers en priorité
  **/
 void wolf::move() {
-    
+    is_get_sheep();
     // SI un chien est trop proche alors le loup s'en eloigne
     if (to_close){
         if (pos.x > closest_dog_pos_.x )
@@ -91,6 +91,18 @@ void wolf::move() {
     // Reset the time_point to the current time
     start = std::chrono::steady_clock::now();
 */
+void wolf::is_get_sheep(){
+    // Il y a une difference de position de 1 entre les deux image quand elle sont l'un sur l'autre
+    if (nearest_sheep_pos_.x == pos.x +1 && nearest_sheep_pos_.y== pos.y +1){
+        get_Sheep = true;
+        isalive = false;
+        
+        
+    }
+    else{
+        get_Sheep = false;
+    }
+}
 
 
 /**
