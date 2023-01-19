@@ -4,6 +4,7 @@
 #include "animal.h"
 #include "wolf.h"
 #include "sheep.h"
+#include "sheperd.h"
 #include "utility.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -32,6 +33,8 @@ class ground
 		unsigned nb_babies = 0;
 
 		std::vector<std::shared_ptr<animal>> animals;
+		std::vector<std::shared_ptr<sheperd>> sheperds;
+		int scoreF;
 		// todo: Ctor
 		ground(SDL_Surface* window_surface_ptr);
 
@@ -39,6 +42,7 @@ class ground
 		~ground(){};
 
 		void add_animal(const std::shared_ptr<animal>& animal); 
+		void add_sheperd(const std::shared_ptr<sheperd>& sheperd); 
 
 		// todo: Refresh the screen : Move animals and draw them (method of animal)
 		unsigned update();

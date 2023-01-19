@@ -30,7 +30,7 @@ void wolf::get_neareast_animal(std::vector<std::shared_ptr<animal>> animals){
             if (neareast > animal_distance){
                 neareast = animal_distance;
                 closest_dog_pos_ = animal_ptr->pos;
-                // Verifie si le chien du shepherd est trop proche du loup
+                // Verifie si le chien du sheperd est trop proche du loup
                 if (animal_distance < DIST_MIN_WOLF)
                     to_close = true;
                 else{

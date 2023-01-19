@@ -25,6 +25,10 @@ void ground::add_animal(const std::shared_ptr<animal>& animal){
 		 
 }
 
+void ground::add_sheperd(const std::shared_ptr<sheperd>& sheperd){
+	sheperds.push_back(sheperd);
+}
+
 unsigned ground::update(){
 		int total_babies = 0;
 		int last_baby = 1;
@@ -49,6 +53,10 @@ unsigned ground::update(){
 			}
         	animal_ptr->move();
 		}
+		for(auto &shep : sheperds){
+			shep->move();
+		}
+
 		// Clear the screen
 		SDL_FillRect(window_surface_ptr_, nullptr ,SDL_MapRGB(window_surface_ptr_->format, 0, 255, 0));
 		// Draw all animals
@@ -70,8 +78,13 @@ unsigned ground::update(){
 			//Ne marche pas encore mais verifie si l'animal est toujours en vie sinon pouf il disparait
 			if (!animal_ptr->isalive) {
 				animal_ptr.reset();// releases the resource and free the memory
+				if (animal_ptr->type == SHEEP)
+					scoreF--;
 			}
 			animal_ptr->draw();	
+		}
+		for(auto &shep : sheperds){
+			shep->draw();
 		}
 	return add_sheep;
 }
@@ -89,6 +102,7 @@ unsigned ground::update(){
 		createWindow();	
 		ground_ = std::make_unique<ground>(window_surface_ptr_);
 
+		ground_->scoreF = n_sheep;
 		for (int i = 0; i < Nsheep; ++i) {
 			std::shared_ptr<sheep> sheeps = std::make_shared<sheep>(file_path_sheep, window_surface_ptr_);
 			ground_->add_animal(sheeps);
@@ -104,6 +118,9 @@ unsigned ground::update(){
 			
 			
 		}
+		std::shared_ptr<sheperd> sheperd1 = std::make_shared<sheperd>(file_path_sheperd, window_surface_ptr_);
+		ground_->add_sheperd(sheperd1);
+		sheperd1->draw();
 	}
 
 	application::~application(){
@@ -163,7 +180,7 @@ unsigned ground::update(){
 		SDL_DestroyRenderer(window_renderer_);
 		SDL_DestroyWindow(window_ptr_);
 		SDL_Quit();
-		
+		std::cout << "The score of the application is: " << ground_->scoreF << std::endl;
 		return period;
 	}
 
