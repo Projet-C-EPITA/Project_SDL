@@ -25,6 +25,12 @@ class ground
 		// Some attribute to store all the wolves and sheep here
 	
 	public:
+		//number of loops done
+		unsigned count_loop;
+
+		//number of babies byloop
+		unsigned nb_babies = 0;
+
 		std::vector<std::shared_ptr<animal>> animals;
 		// todo: Ctor
 		ground(SDL_Surface* window_surface_ptr);
@@ -35,8 +41,11 @@ class ground
 		void add_animal(const std::shared_ptr<animal>& animal); 
 
 		// todo: Refresh the screen : Move animals and draw them (method of animal)
-		void update();
+		unsigned update();
 		
+		//set number of sheeps
+		void set_CountLoop(unsigned count);
+
 		// Possibly other methods, depends on your implementation
 };
 
@@ -68,6 +77,9 @@ class application
 
 
 		void createWindow();
+
+		//set number of sheeps
+		void add_sheep();
 		
 		// Main loop of the application. This ensures that the screen is 
 		// updated at the correct rate. See SDL_GetTicks() and SDL_Delay() to 

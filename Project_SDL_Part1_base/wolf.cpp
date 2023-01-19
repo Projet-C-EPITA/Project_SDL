@@ -99,7 +99,9 @@ void wolf::move() {
  * ne marche pas encore !!
 */
 void wolf::time_to_catch(){
-    if ((nearest_sheep_pos_.x - pos.x == pos.x || (nearest_sheep_pos_.x - 1 == pos.x) || (nearest_sheep_pos_.x + 1 == pos.x)) && (nearest_sheep_pos_.y== pos.y || (nearest_sheep_pos_.y -1) == pos.y ||(nearest_sheep_pos_.y +1) == pos.y)){
+    if ((nearest_sheep_pos_.x - pos.x == pos.x || 
+    (nearest_sheep_pos_.x - 1 == pos.x) || (nearest_sheep_pos_.x + 1 == pos.x) || (nearest_sheep_pos_.x + 2 == pos.x) || (nearest_sheep_pos_.x - 2 == pos.x)) 
+    && (nearest_sheep_pos_.y == pos.y || (nearest_sheep_pos_.y -1) == pos.y ||(nearest_sheep_pos_.y +1) == pos.y || (nearest_sheep_pos_.y -2) == pos.y ||(nearest_sheep_pos_.y +2) == pos.y)){
         get_Sheep = true;
         m_lastMealTime = SDL_GetTicks();
         nearest_sheep->isalive = false;
