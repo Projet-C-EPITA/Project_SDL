@@ -4,6 +4,7 @@
 #include "animal.h"
 #include "wolf.h"
 #include "sheep.h"
+#include "sheperd.h"
 #include "utility.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -14,94 +15,26 @@
 #include <vector>
 
 
-/*
 
-class animal
-{
-	private:
-		// ptr to the surface on which we want the animal to be drawn, also 
-		// non-owning
-		SDL_Surface* window_surface_ptr_;
-		// The texture of the sheep (the loaded image), use load_surface_for
-		SDL_Texture* texture_img_;
-
-	protected:
-		SDL_Surface * image_;
-		enum eDirection {UPLEFT, UPRIGHT, DOWNRIGHT, DOWNLEFT, UP, DOWN, RIGHT, LEFT};
-		eDirection dir = UPRIGHT; 
-		
-		SDL_Rect pos; //position de l'animal
-	
-	public:
-		// todo: The constructor has to load the sdl_surface that corresponds 
-		// to the texture
-		animal(const std::string& file_path, SDL_Surface* window_surface_ptr); 
-
-		// todo: Use the destructor to release memory and clean-up behind you
-		~animal();
-
-		// todo: Draw the animal on the screen window_surface_ptr
-		// Note that this function is not virtual, it does not depend on the 
-		// static type of the instance
-		void draw();
-
-		SDL_Rect get_position();
-
-		
-		virtual void move() = 0;
-
-};
-
-class sheep : public animal {
-	
-	private: 
-	int lastDir;
-	
-	public:
-
-	sheep(const std::string& file_path, SDL_Surface* window_surface_ptr): 
-	animal(file_path, window_surface_ptr) {} ;
-
-	~sheep() = default;
-	// THe sheep move randomly on the map expect when he getting too close to a wolf, they get a temporary speed boost in the opposite direction of the wolf. When two sheep meet
-	//they can produce an offspring 
-
-	virtual void move() override;
-	
-};
-//--------------------------------Partie Wolf --------------------------
-class wolf : public animal
-{
-	
-	private: 
-	int lastDir;
-	
-    public:
-
-	wolf(const std::string& file_path, SDL_Surface* window_surface_ptr): 
-	animal(file_path, window_surface_ptr){};
-
-	~wolf()= default;
-	//they will direct themselves towards the nearest sheep. 
-	//If a wolf does not catch a sheep after a certain period, it will starve and die
-	virtual void move() override;
-	
-};*/
-
-
-
-// The ground on which all the animals live (like the std::vector in the zoo 
-// exemple).
 class ground
 {
 	private:
 		// Attention, non-owning ptr, again to the screen
 		SDL_Surface* window_surface_ptr_;
-	protected:	
-		std::vector<std::shared_ptr<animal>> animals;
+	
+		
 		// Some attribute to store all the wolves and sheep here
 	
 	public:
+		//number of loops done
+		unsigned count_loop;
+
+		//number of babies byloop
+		unsigned nb_babies = 0;
+
+		std::vector<std::shared_ptr<animal>> animals;
+		std::vector<std::shared_ptr<sheperd>> sheperds;
+		int scoreF;
 		// todo: Ctor
 		ground(SDL_Surface* window_surface_ptr);
 
@@ -109,10 +42,14 @@ class ground
 		~ground(){};
 
 		void add_animal(const std::shared_ptr<animal>& animal); 
+		void add_sheperd(const std::shared_ptr<sheperd>& sheperd); 
 
 		// todo: Refresh the screen : Move animals and draw them (method of animal)
-		void update();
+		unsigned update();
 		
+		//set number of sheeps
+		void set_CountLoop(unsigned count);
+
 		// Possibly other methods, depends on your implementation
 };
 
@@ -144,6 +81,9 @@ class application
 
 
 		void createWindow();
+
+		//set number of sheeps
+		void add_sheep();
 		
 		// Main loop of the application. This ensures that the screen is 
 		// updated at the correct rate. See SDL_GetTicks() and SDL_Delay() to 

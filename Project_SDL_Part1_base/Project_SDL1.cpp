@@ -6,260 +6,87 @@
 #include <numeric>
 #include <random>
 #include <string>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 
 
-// ---------------------------------Partie Animal ----------------------------------------
 
-/*
-animal::animal(const std::string& file_path, SDL_Surface* window_surface_ptr){
-    window_surface_ptr_ = window_surface_ptr;
-    image_ = load_surface_for(file_path, window_surface_ptr_); 
-    if(NULL == image_){
-        fprintf(stderr, "Erreur SDL_LoadBMP : %s", SDL_GetError());
-    }
-
-    pos.x = rand() % frame_width - image_->w; //position aleatoire de l'animal 
-    pos.y = rand() % frame_height - image_->h;
-	pos.w = image_->w;
-    pos.h = image_->h;
-    
-}
-void animal::draw(){
-			//SDL_Surface* image = IMG_Load(file_path);
-			//SDL_Texture* texture = SDL_CreateTextureFromSurface(window_renderer_, image_);
-			//SDL_Rect rect = {pos.w, pos.h, pos.x, pos.y};
-			SDL_BlitSurface(image_, NULL, window_surface_ptr_, &pos);
-		};
-
-SDL_Rect animal::get_position() {
-  return this->pos;
-}
-
-animal::~animal(){
-    SDL_FreeSurface(image_);
-   // SDL_FreeSurface(window_surface_ptr_);
-};
-
-
- // ----------------------------------------Partie Sheep --------------------------------------
-
-void sheep::move(){
-
-    //bounces on the sides
-      if (pos.x == 1 || pos.x == frame_width -image_->w) {
-          switch (lastDir) {
-          case 0:
-              dir = UPRIGHT;    //this code checks if the sheep is right next to a wall 
-              break;                 
-          case 1:               
-              dir = UPLEFT;    
-              break;
-          case 2:
-              dir = DOWNLEFT;
-              break;
-          case 3:
-              dir = DOWNRIGHT;
-              break;
-          case 6: // pas mis de case 4 parceque on atteint pas les side si on va que en haut
-              dir = LEFT;//pas sur que ca soit atteint
-              break;
-          case 7: 
-              dir = RIGHT;
-              break;
-          }
-      }
-      //bounces on the top and bottom
-      if (pos.y == 1 || pos.y == frame_height -image_->h) {
-          switch (lastDir) {
-          case 0:
-              dir = DOWNLEFT;  //same thing down here but for
-              break;           //the top and bottom
-          case 1:             
-              dir = DOWNRIGHT;
-              break;
-          case 2:
-              dir = UPRIGHT;
-              break;
-          case 3:
-              dir = UPLEFT;
-              break;
-          case 4: 
-              dir = DOWN; 
-              break;
-          case 5: 
-              dir = UP;
-              break; 
-          }
-      }
-
-      switch (dir) {
-          case UPLEFT: 
-               pos.x--;     //this code moves the sheep 
-               pos.y--;     
-              break;       
-          case UPRIGHT:
-               pos.x++;
-               pos.y--;
-              break;
-          case DOWNLEFT:
-               pos.x--;
-               pos.y++;
-              break;
-          case DOWNRIGHT:
-               pos.x++;
-               pos.y++;
-              break;
-          case UP:
-               pos.x++;
-              break;
-          case DOWN:
-               pos.x--;
-              break;
-          case LEFT:
-               pos.y++;
-              break;
-          case RIGHT:
-               pos.y--;
-              break;
-      }
-      lastDir = dir; //it saves the last direction
-  }                 
-
-
- //----------------------------------------Partie Wolf ---------------------------------------
-void wolf::move(){
-    //Selection d'une direction aléatoire entre -8 et 10 de base de faisait entre -1 et 1
-/*	int rand_dirX = 2* (rand()%3 - 1); // soit +1 soit -1
-	int rand_dirY = 2* (rand()%3- 1);
-
-    std::cout << "randx"<< rand_dirX << "randy : " << rand_dirY << "\n";
-    std::cout << "x:" << pos.x << "y : " << pos.y << "\n";
-    
-    // Verifie si loup ne touche pas le bord
-    if (pos.y <= 1 || pos.y >= frame_height - image_->h) {
-       // std::cout << "loup touche bord Y"  << "/n";
-        if (rand_dirY > 0)
-            rand_dirY *=-rand_dirY;
-    }
-        //rand_dirY == 1 ? rand_dirY * (-1) : rand_dirY;
-    
-    if (pos.x <= 1 || pos.x >= frame_width - image_->w) 
-    {
-       std::cout << "loup touche bord X" <<"/n" ;
-        if (rand_dirX > 0)
-            rand_dirX *=-rand_dirX;
-    }
-        //rand_dirX == 1 ? rand_dirX * (-1) : rand_dirX;
-     
-    pos.x += rand_dirX;
-    pos.y += rand_dirX;
-    
-
-   if (pos.x == 1 || pos.x == frame_width -image_->w) {
-          switch (lastDir) {
-          case 0:
-              dir = DOWNRIGHT;  
-              break;           
-          case 1:             
-              dir = DOWNLEFT;
-              break;
-          case 2:
-              dir = UPLEFT;
-              break;
-          case 3:
-              dir = UPRIGHT;
-              break;
-          case 6: // pas mis de case 4 parceque on atteint pas les side si on va que en haut
-              dir = LEFT;//pas sur que ca soit atteint
-              break;
-          case 7: 
-              dir = RIGHT;
-              break;
-          }
-      }
-      //bounces on the top and bottom
-      if (pos.y == 1 || pos.y == frame_height -image_->h) {
-          switch (lastDir) {
-          case 0:
-              dir = DOWNRIGHT;  
-              break;           
-          case 1:             
-              dir = DOWNLEFT;
-              break;
-          case 2:
-              dir = UPLEFT;
-              break;
-          case 3:
-              dir = UPRIGHT;
-              break;
-          case 4: 
-              dir = DOWN; 
-              break;
-          case 5: 
-              dir = UP;
-              break; 
-          }
-      }
-    
-  // dir  = (rand()% 8) + 1;
-    //std::cout << "dir" << dir << "\n" ;
-      switch ((rand()% 8) + 1) {
-          case UPLEFT: 
-               pos.x--;     //this code moves the sheep 
-               pos.y--;     
-              break;       
-          case UPRIGHT:
-               pos.x++;
-               pos.y--;
-              break;
-          case DOWNLEFT:
-               pos.x--;
-               pos.y++;
-              break;
-          case DOWNRIGHT:
-               pos.x++;
-               pos.y++;
-              break;
-          case UP:
-               pos.x++;
-              break;
-          case DOWN:
-               pos.x--;
-              break;
-          case LEFT:
-               pos.y++;
-              break;
-          case RIGHT:
-               pos.y--;
-              break;
-      }
-      lastDir = dir; //it saves the last direction
-                  
-
-}
-*/
 //---------------------------------------Partie Ground -----------------------------------------
 
 ground::ground(SDL_Surface* window_surface_ptr){
 		window_surface_ptr_ = window_surface_ptr;
 }
-
+void ground::set_CountLoop(unsigned count){
+	count_loop = count;
+}
 
 void ground::add_animal(const std::shared_ptr<animal>& animal){
 		 animals.push_back(animal);
+		 
 }
 
-void ground::update(){
+void ground::add_sheperd(const std::shared_ptr<sheperd>& sheperd){
+	sheperds.push_back(sheperd);
+}
 
-		for (auto &animal_ptr : animals)
+unsigned ground::update(){
+		int total_babies = 0;
+		int last_baby = 1;
+		int add_sheep = 0;
+		for (auto &animal_ptr : animals){
+			int new_sheeps = 0;
+			// Calcule ici le mouton le plus proche pour change la direction du loup
+			if (animal_ptr->type == WOLF){
+				auto wolfs = std::static_pointer_cast<wolf>(animal_ptr);
+				wolfs->get_neareast_animal(ground::animals); // TODO :va en meme temps calculer closest dog
+			}
+			if (animal_ptr->type == SHEEP){
+				auto sheeps = std::static_pointer_cast<sheep>(animal_ptr);
+				sheeps->get_nearest_wolf(ground::animals);
+				if(sheeps->offspring == true){
+					new_sheeps++;
+				}
+			}
+			
+			if(new_sheeps>=1){
+				total_babies++;
+			}
         	animal_ptr->move();
+		}
+		for(auto &shep : sheperds){
+			shep->move();
+		}
+
 		// Clear the screen
 		SDL_FillRect(window_surface_ptr_, nullptr ,SDL_MapRGB(window_surface_ptr_->format, 0, 255, 0));
 		// Draw all animals
-		for (auto &animal_ptr : animals)
-			animal_ptr->draw();		
+		SDL_Delay(15);
+		//reset number of babies created when new loop starts
+		if(count_loop == 1)
+			nb_babies = 0;
+		//creates babies if 2 sheeps collide
+		if(total_babies>1){
+			nb_babies++;
+			if(nb_babies == 1){
+				last_baby = count_loop;
+				auto baby = std::make_shared<sheep>(file_path_sheep, window_surface_ptr_);
+				add_animal(baby);
+				add_sheep++;
+			}
+		}
+		for (auto &animal_ptr : animals){
+			//Ne marche pas encore mais verifie si l'animal est toujours en vie sinon pouf il disparait
+			if (!animal_ptr->isalive) {
+				animal_ptr.reset();// releases the resource and free the memory
+				if (animal_ptr->type == SHEEP)
+					scoreF--;
+			}
+			animal_ptr->draw();	
+		}
+		for(auto &shep : sheperds){
+			shep->draw();
+		}
+	return add_sheep;
 }
 
 	
@@ -271,21 +98,30 @@ void ground::update(){
 		
 		Nsheep = n_sheep;
 		Nwolf = n_wolf;
+		
 		createWindow();	
 		ground_ = std::make_unique<ground>(window_surface_ptr_);
-	
+
+		ground_->scoreF = n_sheep;
 		for (int i = 0; i < Nsheep; ++i) {
 			std::shared_ptr<sheep> sheeps = std::make_shared<sheep>(file_path_sheep, window_surface_ptr_);
 			ground_->add_animal(sheeps);
 			sheeps->draw();
+			sheeps->type = SHEEP;
 		}
 
 		for (int i = 0; i < Nwolf; ++i) {
 			std::shared_ptr<wolf> wolfs =std::make_shared<wolf>(file_path_wolf, window_surface_ptr_);
 			ground_->add_animal(wolfs);
 			wolfs->draw();
+			wolfs->type = WOLF;
+			
+			
 		}
-	}	
+		std::shared_ptr<sheperd> sheperd1 = std::make_shared<sheperd>(file_path_sheperd, window_surface_ptr_);
+		ground_->add_sheperd(sheperd1);
+		sheperd1->draw();
+	}
 
 	application::~application(){
 		SDL_DestroyWindow(window_ptr_);
@@ -317,26 +153,34 @@ void ground::update(){
 	}
 	
 
-	int application::loop(unsigned period){
-		//animal wolf("../../media/wolf.png", window_surface_ptr_);
-		//wolf.draw();
-
+	int application::loop(unsigned period) {
+		int count = 0;
 		while(SDL_GetTicks() < (period*1000) && is_open){
+			count++;
+			ground_->set_CountLoop(count);
 			SDL_PollEvent(&window_event_);
 			switch (window_event_.type) {
 				case SDL_QUIT:
 					is_open = false;
 					break;
 			}
-			ground_->update();
+			unsigned nb_sheep = ground_->update();
+			if(nb_sheep == 1)
+				Nsheep++;
 			SDL_UpdateWindowSurface(window_ptr_);
+			//*2 to avoid too many children at once, reset the count every 2 loops
+			if(count == Nsheep*2){
+				count = 0;
+				ground_->set_CountLoop(count);
+			}
+				
 		}		
 		
 		//A mettre dans le dtor de app
 		SDL_DestroyRenderer(window_renderer_);
 		SDL_DestroyWindow(window_ptr_);
 		SDL_Quit();
-		
+		std::cout << "The score of the application is: " << ground_->scoreF << std::endl;
 		return period;
 	}
 

@@ -1,112 +1,117 @@
 #include "wolf.h"
 
+/**
+ * Cette fonction calcule la distance min du loup avec un des sheep du ground
+ * et met la position du sheep le plus proche dans neareast_sheep
+*/
+void wolf::get_neareast_animal(std::vector<std::shared_ptr<animal>> animals){
+    int animal_distance_x ;
+    int animal_distance_y ;
+    int animal_distance ;
+    int neareast = frame_width;
+    
+    for (auto &animal_ptr : animals) {
+        if (animal_ptr->type == SHEEP){
+            
+        	animal_distance_x = animal_ptr->pos.x - pos.x;
+            animal_distance_y = animal_ptr->pos.y - pos.y;
+            animal_distance = sqrt(pow(animal_distance_x, 2) + pow(animal_distance_y, 2));
+            if (neareast > animal_distance){
+                neareast = animal_distance;
+                nearest_sheep = animal_ptr;
+                nearest_sheep_pos_ = animal_ptr->pos;
+            }
+        }
+        // PAs fou de copier a voir si mieux plus tard
+        else if (animal_ptr->type == DOG){
+            animal_distance_x = animal_ptr->pos.x - pos.x;
+            animal_distance_y = animal_ptr->pos.y - pos.y;
+            animal_distance = sqrt(pow(animal_distance_x, 2) + pow(animal_distance_y, 2));
+            if (neareast > animal_distance){
+                neareast = animal_distance;
+                closest_dog_pos_ = animal_ptr->pos;
+                // Verifie si le chien du sheperd est trop proche du loup
+                if (animal_distance < DIST_MIN_WOLF)
+                    to_close = true;
+                else{
+                    to_close = false;
+                }
+            }
+        }
+    }
+    
+}
+
+
+
+
+/**
+ * Cette fonction bouge le loup dans la direction du mouton le + proche 
+ * mais en evitant les chiens du bergers en priorité
+ **/
 void wolf::move() {
-    //Selection d'une direction aléatoire entre -8 et 10 de base de faisait entre -1 et 1
-/*	int rand_dirX = 2* (rand()%3 - 1); // soit +1 soit -1
-	int rand_dirY = 2* (rand()%3- 1);
-
-    std::cout << "randx"<< rand_dirX << "randy : " << rand_dirY << "\n";
-    std::cout << "x:" << pos.x << "y : " << pos.y << "\n";
     
-    // Verifie si loup ne touche pas le bord
-    if (pos.y <= 1 || pos.y >= frame_height - image_->h) {
-       // std::cout << "loup touche bord Y"  << "/n";
-        if (rand_dirY > 0)
-            rand_dirY *=-rand_dirY;
+    // SI un chien est trop proche alors le loup s'en eloigne
+    if (to_close){
+        if (pos.x > closest_dog_pos_.x )
+            pos.x ++;
+        if (pos.x < closest_dog_pos_.x )
+            pos.x --;
+        if (pos.y > closest_dog_pos_.y )
+            pos.y ++;
+        if (pos.y < closest_dog_pos_.y )
+            pos.y --;
     }
-        //rand_dirY == 1 ? rand_dirY * (-1) : rand_dirY;
-    
-    if (pos.x <= 1 || pos.x >= frame_width - image_->w) 
-    {
-       std::cout << "loup touche bord X" <<"/n" ;
-        if (rand_dirX > 0)
-            rand_dirX *=-rand_dirX;
+    //Sinon il se rapproche d'un mouton
+    else{
+        if (pos.x > nearest_sheep_pos_.x )
+            pos.x --;
+        if (pos.x < nearest_sheep_pos_.x )
+            pos.x ++;
+        if (pos.y > nearest_sheep_pos_.y )
+            pos.y --;
+        if (pos.y < nearest_sheep_pos_.y )
+            pos.y ++;
+
     }
-        //rand_dirX == 1 ? rand_dirX * (-1) : rand_dirX;
-     
-    pos.x += rand_dirX;
-    pos.y += rand_dirX;
-    */
-
-   if (pos.x == 1 || pos.x == frame_width -image_->w) {
-          switch (lastDir) {
-          case 0:
-              dir = DOWNRIGHT;  
-              break;           
-          case 1:             
-              dir = DOWNLEFT;
-              break;
-          case 2:
-              dir = UPLEFT;
-              break;
-          case 3:
-              dir = UPRIGHT;
-              break;
-          case 6: // pas mis de case 4 parceque on atteint pas les side si on va que en haut
-              dir = LEFT;//pas sur que ca soit atteint
-              break;
-          case 7: 
-              dir = RIGHT;
-              break;
-          }
-      }
-      //bounces on the top and bottom
-      if (pos.y == 1 || pos.y == frame_height -image_->h) {
-          switch (lastDir) {
-          case 0:
-              dir = DOWNRIGHT;  
-              break;           
-          case 1:             
-              dir = DOWNLEFT;
-              break;
-          case 2:
-              dir = UPLEFT;
-              break;
-          case 3:
-              dir = UPRIGHT;
-              break;
-          case 4: 
-              dir = DOWN; 
-              break;
-          case 5: 
-              dir = UP;
-              break; 
-          }
-      }
     
-  // dir  = (rand()% 8) + 1;
-    //std::cout << "dir" << dir << "\n" ;
-      switch ((rand()% 8) + 1) {
-          case UPLEFT: 
-               pos.x--;     //this code moves the sheep 
-               pos.y--;     
-              break;       
-          case UPRIGHT:
-               pos.x++;
-               pos.y--;
-              break;
-          case DOWNLEFT:
-               pos.x--;
-               pos.y++;
-              break;
-          case DOWNRIGHT:
-               pos.x++;
-               pos.y++;
-              break;
-          case UP:
-               pos.x++;
-              break;
-          case DOWN:
-               pos.x--;
-              break;
-          case LEFT:
-               pos.y++;
-              break;
-          case RIGHT:
-               pos.y--;
-              break;
-      }
-      lastDir = dir; //it saves the last direction
-                  
+   // wolf::time_to_catch();
+}
 
+/*
+ // Create a time_point that will hold the start time
+    std::chrono::time_point<std::chrono::steady_clock> start = std::chrono::steady_clock::now();
+
+    // Perform some operation
+    std::this_thread::sleep_for(std::chrono::seconds(5));
+
+    // Calculate the duration of the operation
+    std::chrono::duration<double> duration = std::chrono::steady_clock::now() - start;
+    std::cout << "Duration of operation: " << duration.count() << " seconds" << std::endl;
+
+    // Reset the time_point to the current time
+    start = std::chrono::steady_clock::now();
+*/
+
+
+/**
+ * Cette fonction doit calculer le temps ecouler depuis qu'un loup n'a pas manger de mouton 
+ * ne marche pas encore !!
+*/
+void wolf::time_to_catch(){
+    if ((nearest_sheep_pos_.x - pos.x == pos.x || 
+    (nearest_sheep_pos_.x - 1 == pos.x) || (nearest_sheep_pos_.x + 1 == pos.x) || (nearest_sheep_pos_.x + 2 == pos.x) || (nearest_sheep_pos_.x - 2 == pos.x)) 
+    && (nearest_sheep_pos_.y == pos.y || (nearest_sheep_pos_.y -1) == pos.y ||(nearest_sheep_pos_.y +1) == pos.y || (nearest_sheep_pos_.y -2) == pos.y ||(nearest_sheep_pos_.y +2) == pos.y)){
+        get_Sheep = true;
+        m_lastMealTime = SDL_GetTicks();
+        nearest_sheep->isalive = false;
+    }
+
+    Uint32 elapsedTime = SDL_GetTicks() - m_lastMealTime;
+    
+    if (elapsedTime > kStarvationPeriod) {
+            std::cout << "Wolf has died of starvation" << std::endl;
+            isalive = false;
+            
+    }
 }

@@ -4,16 +4,28 @@
 #pragma once
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-//#include "Project_SDL1.h"
 #include "utility.h"
+
 #include <iostream>
 #include <map>
 #include <memory>
 #include <optional>
 #include <vector>
 
+#define DIST_MIN_WOLF 130
 
-class animal
+enum GENDER {
+    MALE,
+    FEMALE
+};
+
+enum TYPE{
+	SHEEP, 
+	WOLF, 
+	DOG
+};
+
+class animal 
 {
 	private:
 		// ptr to the surface on which we want the animal to be drawn, also 
@@ -24,12 +36,17 @@ class animal
 
 	protected:
 		SDL_Surface * image_;
-		enum eDirection {UPLEFT, UPRIGHT, DOWNRIGHT, DOWNLEFT, UP, DOWN, RIGHT, LEFT};
+		enum eDirection {UPLEFT, UPRIGHT, DOWNRIGHT, DOWNLEFT, UP, DOWN, RIGHT, LEFT, RIGHT_BOOST, LEFT_BOOST, UP_BOOST, DOWN_BOOST, UPLEFT_BOOST, UPRIGHT_BOOST, DOWNRIGHT_BOOST, DOWNLEFT_BOOST};
 		eDirection dir = UPRIGHT; 
 		
-		SDL_Rect pos; //position de l'animal
 	
 	public:
+		
+		GENDER sex;
+		SDL_Rect pos; 
+		TYPE type;
+		bool isalive = true;
+		
 		// todo: The constructor has to load the sdl_surface that corresponds 
 		// to the texture
 		animal(const std::string& file_path, SDL_Surface* window_surface_ptr); 
@@ -41,9 +58,6 @@ class animal
 		// Note that this function is not virtual, it does not depend on the 
 		// static type of the instance
 		void draw();
-
-		SDL_Rect get_position();
-
 		
 		virtual void move() = 0;
 
