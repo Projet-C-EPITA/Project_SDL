@@ -71,6 +71,12 @@ unsigned ground::update(){
 				last_baby = count_loop;
 				auto baby = std::make_shared<sheep>(file_path_sheep, window_surface_ptr_);
 				add_animal(baby);
+				baby->type = SHEEP;
+				int random = rand()%2;
+				if(random == 0)
+					baby->sex = FEMALE;
+				else
+					baby->sex = MALE;
 				add_sheep++;
 			}
 		}
@@ -108,6 +114,11 @@ unsigned ground::update(){
 			ground_->add_animal(sheeps);
 			sheeps->draw();
 			sheeps->type = SHEEP;
+			int random = rand()%2;
+			if(random == 0)
+				sheeps->sex = FEMALE;
+			else
+				sheeps->sex = MALE;
 		}
 
 		for (int i = 0; i < Nwolf; ++i) {

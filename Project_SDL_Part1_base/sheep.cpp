@@ -237,10 +237,17 @@ void sheep::get_nearest_wolf(std::vector<std::shared_ptr<animal>> animals){
             animal_distance_x = animal_ptr->pos.x - pos.x;
             animal_distance_y = animal_ptr->pos.y - pos.y;
             animal_distance = sqrt(pow(animal_distance_x, 2) + pow(animal_distance_y, 2));
-            if(animal_distance < 10)
+            // if(animal_distance < 10){
+            //     printf("distance: %d", animal_distance);
+                
+            if(animal_distance < 10 && (((animal_ptr->sex == FEMALE) && (sex = MALE)) || ((animal_ptr->sex == MALE) && (sex = FEMALE))) ){
                 near_sheep++;
-            if(near_sheep == 2)
+            }
+                
+            
+            if(near_sheep == 2){
                 offspring = true;
+            }
         }
     }
     
