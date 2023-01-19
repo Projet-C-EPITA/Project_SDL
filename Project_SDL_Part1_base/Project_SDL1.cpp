@@ -80,14 +80,14 @@ unsigned ground::update(){
 				add_sheep++;
 			}
 		}
-		for (int i = 0 ; i <animals.size(); i++){
+		for (int i = 0 ; i < animals.size(); i++){
 			if (!animals[i]->isalive) {
-				animals.erase(animals.begin() + i--);
-				// Score marche pas
 				if (animals[i]->type == SHEEP)
 					scoreF--;
+				animals.erase(animals.begin() + i--);
 			}
-			animals[i]->draw();	
+			else
+				animals[i]->draw();	
 		}
 		for(auto &shep : sheperds){
 			shep->draw();
