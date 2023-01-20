@@ -1,5 +1,5 @@
-#ifndef sheperd_H
-#define sheperd_H
+#ifndef shepherd_H
+#define shepherd_H
 
 
 #pragma once
@@ -11,42 +11,42 @@
 
 
 
-class sheperd 
+class shepherd 
 {
 private:
     SDL_Surface *image_ptr_;
     SDL_Surface *window_surface_ptr_;
     SDL_Surface *image_;
-    SDL_Rect pos_s; // Position of the sheperd
+    SDL_Rect pos_s; // Position of the shepherd
     SDL_Event *action_; // Event
 
 public:
     
    /**
-     * @summary: This function is the constructor of sheperd it load the image of the sheperd 
+     * @summary: This function is the constructor of shepherd it load the image of the shepherd 
      * and set a random position for the object
      * @param {file_path} : string of the name of the path of the file
      * @param {*window_surface_ptr} : is a pointer to an SDL_Surface object that represents 
      *        the surface of the window. Where the image will be drawn on screen.
     */
-    sheperd(const std::string &file_path, SDL_Surface *window_surface_ptr);
+    shepherd(const std::string &file_path, SDL_Surface *window_surface_ptr);
 
     /**
      * TODO: voir si on tej pas car sharepointer pas beosin de destructeur
-     * @summary This function is the destructor of sheperd
+     * @summary This function is the destructor of shepherd
      * 
     */
-    ~sheperd();
+    ~shepherd();
     
     /**
-     * @summary: This function draw the sheperd on the ground.this copy pixels from 
+     * @summary: This function draw the shepherd on the ground.this copy pixels from 
      * the image_ surface to the window_surface_ptr_.
      * 
     */
     void draw();
 
     /**
-     * @summary: This function allow to move the sheperd with the arrow of the 
+     * @summary: This function allow to move the shepherd with the arrow of the 
      * keyboard (UP, DOWN, LEFT, RIGHT)
      * 
     */
