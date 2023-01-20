@@ -87,6 +87,9 @@ void shepherd::set_Event(SDL_Event *ev)
     action_ = ev;
 }
 
+SDL_Rect shepherd::get_pos_shepherd(){
+    return pos_s;
+}
 
 shepherd::~shepherd()
 {

@@ -133,7 +133,16 @@ unsigned ground::update(){
 		std::shared_ptr<shepherd> shepherd1 = std::make_shared<shepherd>(file_path_shepherd, window_surface_ptr_);
 		ground_->add_shepherd(shepherd1);
 		shepherd1->draw();
+
+		
+		std::shared_ptr<sheep_dog> sheep_dogs =
+            std::make_shared<sheep_dog>(file_path_sheep_dog, window_surface_ptr_, shepherd1->get_pos_shepherd().x, shepherd1->get_pos_shepherd().y );
+		ground_->add_animal(sheep_dogs);
+		sheep_dogs->draw();
+		sheep_dogs->type = DOG;
+
 	}
+
 
 	application::~application(){
 		SDL_DestroyWindow(window_ptr_);

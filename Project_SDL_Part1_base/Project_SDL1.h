@@ -6,6 +6,7 @@
 #include "sheep.h"
 #include "shepherd.h"
 #include "utility.h"
+#include "sheep_dog.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
