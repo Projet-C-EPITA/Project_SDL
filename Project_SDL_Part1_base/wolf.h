@@ -18,7 +18,6 @@ private:
     bool get_Sheep = false;
    
     Uint32 m_lastMealTime = SDL_GetTicks() ;
-     // SI marche pas la mettre dans le constructeur d'animal ou faire un constructeur pour
 
 public:
     /**

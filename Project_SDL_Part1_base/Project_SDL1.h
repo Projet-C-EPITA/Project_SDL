@@ -35,18 +35,32 @@ public:
     int scoreF;// Final score which correspond to the number of sheep on the ground
 
     ground(SDL_Surface *window_surface_ptr);
-
-    // todo: Dtor, again for clean up (if necessary)
-    ~ground(){};
-
+     // 
+    
+    void set_CountLoop(unsigned count);
+    
+     /**
+     * @summary: This function add a new animal to the vector animals
+     * @param {animal} : shared pointeur of animal
+     *
+     */
     void add_animal(const std::shared_ptr<animal> &animal);
+
+    /**
+     * @summary: This function add a new shepherd to the vector shepherds
+     * @param {animal} : shared pointeur of shepherd
+     *
+     */
     void add_shepherd(const std::shared_ptr<shepherd> &shepherd);
 
-    // todo: Refresh the screen : Move animals and draw them (method of animal)
+    /**
+     * @summary: This function Refresh the screen : Move animals/Shepherd and draw them
+     * 
+     */ 
     unsigned update();
 
-    // set number of sheeps
-    void set_CountLoop(unsigned count);
+    ~ground(){};
+   
 };
 
 // The application class, which is in charge of generating the window

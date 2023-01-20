@@ -38,6 +38,7 @@ private:
 
 protected:
     SDL_Surface *image_;
+    // This enum reference all the direction possible for the animals include when they have a boost
     enum eDirection
     {
         UPLEFT,
@@ -61,7 +62,7 @@ protected:
 
 public:
     GENDER sex;
-    SDL_Rect pos;
+    SDL_Rect pos; //Position of the animal
     TYPE type;
     bool isalive = true;
     
@@ -84,7 +85,12 @@ public:
      * static type of the instance
      */
     void draw();
-
+    
+    /**
+     * @summary: This virtual function gonna be instancied in the class wolf,
+     * sheep and shepherd dog. The keyword virtual indicates that this function 
+     * can be overridden by derived classes.
+     */
     virtual void move() = 0;
 
     

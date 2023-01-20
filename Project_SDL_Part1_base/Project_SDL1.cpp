@@ -15,6 +15,7 @@ ground::ground(SDL_Surface *window_surface_ptr)
 {
     window_surface_ptr_ = window_surface_ptr;
 }
+
 void ground::set_CountLoop(unsigned count)
 {
     count_loop = count;
