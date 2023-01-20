@@ -51,7 +51,7 @@ void wolf::get_neareast_animal(std::vector<std::shared_ptr<animal>> animals){
  **/
 void wolf::move() {
     is_get_sheep();
-
+    time_to_catch();
     // SI un chien est trop proche alors le loup s'en eloigne
     if (to_close){
         if (pos.x > closest_dog_pos_.x )
@@ -76,45 +76,29 @@ void wolf::move() {
 
     }
     
-   // wolf::time_to_catch();
+   
 }
-
-/*
- // Create a time_point that will hold the start time
-    std::chrono::time_point<std::chrono::steady_clock> start = std::chrono::steady_clock::now();
-
-    // Perform some operation
-    std::this_thread::sleep_for(std::chrono::seconds(5));
-
-    // Calculate the duration of the operation
-    std::chrono::duration<double> duration = std::chrono::steady_clock::now() - start;
-    std::cout << "Duration of operation: " << duration.count() << " seconds" << std::endl;
-
-    // Reset the time_point to the current time
-    start = std::chrono::steady_clock::now();
-*/
 
 
 /**
  * Cette fonction doit calculer le temps ecouler depuis qu'un loup n'a pas manger de mouton 
  * ne marche pas encore !!
 */
-void wolf::time_to_catch(){
-    if ((nearest_sheep_pos_.x - pos.x == pos.x || 
-    (nearest_sheep_pos_.x - 1 == pos.x) || (nearest_sheep_pos_.x + 1 == pos.x) || (nearest_sheep_pos_.x + 2 == pos.x) || (nearest_sheep_pos_.x - 2 == pos.x)) 
-    && (nearest_sheep_pos_.y == pos.y || (nearest_sheep_pos_.y -1) == pos.y ||(nearest_sheep_pos_.y +1) == pos.y || (nearest_sheep_pos_.y -2) == pos.y ||(nearest_sheep_pos_.y +2) == pos.y)){
-        get_Sheep = true;
+void wolf::time_to_catch()
+{
+    if (get_Sheep) 
+    {
         m_lastMealTime = SDL_GetTicks();
-        nearest_sheep->isalive = false;
     }
+    else{
+        Uint32 elapsedTime = SDL_GetTicks() - m_lastMealTime;
 
-    Uint32 elapsedTime = SDL_GetTicks() - m_lastMealTime;
-    
-    if (elapsedTime > kStarvationPeriod) {
-            std::cout << "Wolf has died of starvation" << std::endl;
+        if (elapsedTime > kStarvationPeriod)
+        {
             isalive = false;
-            
+        }
     }
+    
 }
 
 void wolf::is_get_sheep(){

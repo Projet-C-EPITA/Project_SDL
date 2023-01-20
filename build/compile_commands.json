@@ -1,0 +1,37 @@
+[
+{
+  "directory": "/home/cam/Documents/GitHub/Project_SDL/build/Project_SDL_Part1_base",
+  "command": "/usr/bin/g++  -I/usr/include/SDL2 -I/usr/include/SDL2_image -g -o CMakeFiles/SDL_part1.dir/main.cpp.o -c /home/cam/Documents/GitHub/Project_SDL/Project_SDL_Part1_base/main.cpp",
+  "file": "/home/cam/Documents/GitHub/Project_SDL/Project_SDL_Part1_base/main.cpp"
+},
+{
+  "directory": "/home/cam/Documents/GitHub/Project_SDL/build/Project_SDL_Part1_base",
+  "command": "/usr/bin/g++  -I/usr/include/SDL2 -I/usr/include/SDL2_image -g -o CMakeFiles/SDL_part1.dir/Project_SDL1.cpp.o -c /home/cam/Documents/GitHub/Project_SDL/Project_SDL_Part1_base/Project_SDL1.cpp",
+  "file": "/home/cam/Documents/GitHub/Project_SDL/Project_SDL_Part1_base/Project_SDL1.cpp"
+},
+{
+  "directory": "/home/cam/Documents/GitHub/Project_SDL/build/Project_SDL_Part1_base",
+  "command": "/usr/bin/g++  -I/usr/include/SDL2 -I/usr/include/SDL2_image -g -o CMakeFiles/SDL_part1.dir/animal.cpp.o -c /home/cam/Documents/GitHub/Project_SDL/Project_SDL_Part1_base/animal.cpp",
+  "file": "/home/cam/Documents/GitHub/Project_SDL/Project_SDL_Part1_base/animal.cpp"
+},
+{
+  "directory": "/home/cam/Documents/GitHub/Project_SDL/build/Project_SDL_Part1_base",
+  "command": "/usr/bin/g++  -I/usr/include/SDL2 -I/usr/include/SDL2_image -g -o CMakeFiles/SDL_part1.dir/sheep.cpp.o -c /home/cam/Documents/GitHub/Project_SDL/Project_SDL_Part1_base/sheep.cpp",
+  "file": "/home/cam/Documents/GitHub/Project_SDL/Project_SDL_Part1_base/sheep.cpp"
+},
+{
+  "directory": "/home/cam/Documents/GitHub/Project_SDL/build/Project_SDL_Part1_base",
+  "command": "/usr/bin/g++  -I/usr/include/SDL2 -I/usr/include/SDL2_image -g -o CMakeFiles/SDL_part1.dir/wolf.cpp.o -c /home/cam/Documents/GitHub/Project_SDL/Project_SDL_Part1_base/wolf.cpp",
+  "file": "/home/cam/Documents/GitHub/Project_SDL/Project_SDL_Part1_base/wolf.cpp"
+},
+{
+  "directory": "/home/cam/Documents/GitHub/Project_SDL/build/Project_SDL_Part1_base",
+  "command": "/usr/bin/g++  -I/usr/include/SDL2 -I/usr/include/SDL2_image -g -o CMakeFiles/SDL_part1.dir/utility.cpp.o -c /home/cam/Documents/GitHub/Project_SDL/Project_SDL_Part1_base/utility.cpp",
+  "file": "/home/cam/Documents/GitHub/Project_SDL/Project_SDL_Part1_base/utility.cpp"
+},
+{
+  "directory": "/home/cam/Documents/GitHub/Project_SDL/build/Project_SDL_Part1_base",
+  "command": "/usr/bin/g++  -I/usr/include/SDL2 -I/usr/include/SDL2_image -g -o CMakeFiles/SDL_part1.dir/shepherd.cpp.o -c /home/cam/Documents/GitHub/Project_SDL/Project_SDL_Part1_base/shepherd.cpp",
+  "file": "/home/cam/Documents/GitHub/Project_SDL/Project_SDL_Part1_base/shepherd.cpp"
+}
+]

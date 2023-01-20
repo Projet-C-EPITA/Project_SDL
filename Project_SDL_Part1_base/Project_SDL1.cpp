@@ -78,6 +78,7 @@ unsigned ground::update(){
 				else
 					baby->sex = MALE;
 				add_sheep++;
+				scoreF++;
 			}
 		}
 		for (int i = 0 ; i < animals.size(); i++){
