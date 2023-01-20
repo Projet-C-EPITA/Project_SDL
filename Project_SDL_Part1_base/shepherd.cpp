@@ -1,6 +1,12 @@
 #include "shepherd.h"
 
-
+/**
+ * @summary  This function is the constructor of shepherd it load the image of the shepherd 
+ * and set a random position for the object
+ * @param {file_path} : string of the name of the path of the file
+ * @param {*window_surface_ptr} : is a pointer to an SDL_Surface object that represents 
+ *        the surface of the window. Where the image will be drawn on screen.
+*/
 shepherd::shepherd(const std::string &file_path, SDL_Surface *window_surface_ptr)
 {
     // On charge l'image du berger
