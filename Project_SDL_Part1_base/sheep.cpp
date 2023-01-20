@@ -4,42 +4,35 @@
 
 void sheep::move()
 {
-    // check if wolf near sheep, if yes, go on the opposite direction with a
-    // boost
+    // check if wolf near sheep, if yes, go on the opposite direction
     if (to_close_sheep == 1 && pos.x != 1
         && (pos.x + 1) < frame_width - image_->w && pos.y != 1
         && (pos.y + 1) < frame_height - image_->h)
     {
-        // test si le loup est à gauche du sheep
+        // test if wolf is left
         if (pos.x > nearest_wolf_pos_.x)
-            // si loup au même niveau que le sheep sur y
+            // if wolf in same line than sheep
             if (pos.y == nearest_wolf_pos_.y || pos.y - 1 == nearest_wolf_pos_.y
                 || pos.y + 1 == nearest_wolf_pos_.y)
-                // dir = RIGHT_BOOST;
                 dir = RIGHT;
-            // si le loup en bas du sheep en y
+            // if wolf is up compared to sheep
             else if (pos.y > nearest_wolf_pos_.y)
-                // dir = DOWNRIGHT_BOOST;
                 dir = DOWNRIGHT;
-            // si le loup en haut du sheep en y
+            // if wolf is down compared to sheep
             else
-                // dir = UPRIGHT_BOOST;
                 dir = UPRIGHT;
 
-        // test si le loup est à droite du sheep
+        // test if wolf is right
         if (pos.x < nearest_wolf_pos_.x)
-            // si loup au même niveau que le sheep sur y
+            // if wolf in same column than sheep
             if (pos.y == nearest_wolf_pos_.y || pos.y - 1 == nearest_wolf_pos_.y
                 || pos.y + 1 == nearest_wolf_pos_.y)
-                // dir = LEFT_BOOST;
                 dir = LEFT;
-            // si le loup en bas du sheep en y
+            // if wolf is up compared to sheep
             else if (pos.y > nearest_wolf_pos_.y)
-                // dir = DOWNLEFT_BOOST;
                 dir = DOWNLEFT;
-            // si le loup en haut du sheep en y
+            // if wolf is down compared to sheep
             else
-                // dir = UPLEFT_BOOST;
                 dir = UPLEFT;
     }
 
@@ -49,11 +42,11 @@ void sheep::move()
         if (pos.x == 1 || (pos.x - 1) >= frame_width - image_->w)
         {
             speed = 2;
+            // checks if the sheep is right next to a wall
             switch (lastDir)
             {
             case 0:
-                dir = UPRIGHT; // this code checks if the sheep is right next to
-                               // a wall
+                dir = UPRIGHT; 
                 
                 break;
             case 1:
@@ -65,8 +58,7 @@ void sheep::move()
             case 3:
                 dir = DOWNRIGHT;
                 break;
-            case 6: // pas mis de case 4 parceque on atteint pas les side si on
-                    // va que en haut
+            case 6: 
                 dir = LEFT; 
                 break;
             case 7:
@@ -99,8 +91,8 @@ void sheep::move()
             switch (lastDir)
             {
             case 0:
-                dir = DOWNLEFT; // same thing down here but for
-                break; // the top and bottom
+                dir = DOWNLEFT; 
+                break;
             case 1:
                 dir = DOWNRIGHT;
                 break;
@@ -142,6 +134,7 @@ void sheep::move()
         }
     }
 
+    //modify direction based on previous conditions
     switch (dir)
     {
     case UPLEFT:
@@ -201,10 +194,12 @@ void sheep::move()
         pos.y += 2;
         break;
     }
-    lastDir = dir; // it saves the last direction
+
+    //saves last direction
+    lastDir = dir;
 }
 
-
+//function to get nearest wolf to go on opposite direction
 void sheep::get_nearest_wolf(std::vector<std::shared_ptr<animal>> animals)
 {
     int animal_distance_x;
@@ -212,20 +207,21 @@ void sheep::get_nearest_wolf(std::vector<std::shared_ptr<animal>> animals)
     int animal_distance;
     int nearest = frame_width;
     int near_sheep = 0;
+
     for (auto &animal_ptr : animals)
     {
         if (animal_ptr->type == WOLF)
         {
             animal_distance_x = animal_ptr->pos.x - pos.x;
             animal_distance_y = animal_ptr->pos.y - pos.y;
-            animal_distance =
-                sqrt(pow(animal_distance_x, 2) + pow(animal_distance_y, 2));
+            animal_distance = sqrt(pow(animal_distance_x, 2) + pow(animal_distance_y, 2));
 
             if (nearest > animal_distance)
             {
                 nearest = animal_distance;
                 nearest_wolf_pos_ = animal_ptr->pos;
             }
+            //if wolf is too close compared to a certain distance, increase speed
             if (animal_distance < DIST_MIN_WOLF + 5)
             {
                 to_close_sheep = true;
@@ -238,24 +234,26 @@ void sheep::get_nearest_wolf(std::vector<std::shared_ptr<animal>> animals)
                 speed = 1;
             }
         }
+
+        //condition to determine if offspring
         else if (animal_ptr->type == SHEEP)
         {
             offspring = false;
             animal_distance_x = animal_ptr->pos.x - pos.x;
             animal_distance_y = animal_ptr->pos.y - pos.y;
-            animal_distance =
-                sqrt(pow(animal_distance_x, 2) + pow(animal_distance_y, 2));
-
+            animal_distance = sqrt(pow(animal_distance_x, 2) + pow(animal_distance_y, 2));
+            Uint32 elapsedTime = SDL_GetTicks() - last_offspring;
+            //if 2 sheeps are on top of each other
             if (animal_distance < 10
-                && (((animal_ptr->sex == FEMALE) && (sex = MALE))
-                    || ((animal_ptr->sex == MALE) && (sex = FEMALE))))
+                && (((animal_ptr->sex == FEMALE) && (sex = MALE) && elapsedTime >= kStarvationPeriod)
+                || ((animal_ptr->sex == MALE) && (sex = FEMALE))))
             {
                 near_sheep++;
             }
-
             if (near_sheep == 2)
             {
-                offspring = true;
+                offspring = true; 
+                last_offspring = SDL_GetTicks();
             }
         }
     }

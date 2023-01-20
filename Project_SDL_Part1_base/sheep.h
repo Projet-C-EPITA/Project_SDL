@@ -16,6 +16,7 @@ private:
 
 public:
     bool offspring = false;
+    Uint32 last_offspring = SDL_GetTicks();
 
     /**
      * @summary: This function is the constructor of a sheep that inherit animal

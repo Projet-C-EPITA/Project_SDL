@@ -35,8 +35,12 @@ public:
     int scoreF;// Final score which correspond to the number of sheep on the ground
 
     ground(SDL_Surface *window_surface_ptr);
-     // 
-    
+     
+    /**
+     * @summary: This function count the number of loop passed for sheeps
+     * @param {count} : the number of loop
+     *
+     */
     void set_CountLoop(unsigned count);
     
      /**
