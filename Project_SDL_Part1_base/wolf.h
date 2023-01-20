@@ -16,6 +16,7 @@ class wolf : public animal{
 	std::shared_ptr<animal> nearest_sheep;
 	bool to_close = false;
 	bool get_Sheep = false;
+	int speed = 3;
 	Uint32 m_lastMealTime = SDL_GetTicks() ;
     public:
 

@@ -55,13 +55,13 @@ void wolf::move() {
     // SI un chien est trop proche alors le loup s'en eloigne
     if (to_close){
         if (pos.x > closest_dog_pos_.x )
-            pos.x ++;
+            pos.x += speed;
         if (pos.x < closest_dog_pos_.x )
-            pos.x --;
+            pos.x -= speed;
         if (pos.y > closest_dog_pos_.y )
-            pos.y ++;
+            pos.y += speed;
         if (pos.y < closest_dog_pos_.y )
-            pos.y --;
+            pos.y -= speed;
     }
     //Sinon il se rapproche d'un mouton
     else{

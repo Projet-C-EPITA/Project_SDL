@@ -45,6 +45,7 @@ unsigned ground::update(){
 				sheeps->get_nearest_wolf(ground::animals);
 				if(sheeps->offspring == true){
 					new_sheeps++;
+					
 				}
 			}
 			if (animal_ptr->type == DOG){
