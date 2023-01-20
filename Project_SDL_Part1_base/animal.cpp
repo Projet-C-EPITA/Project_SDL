@@ -1,8 +1,6 @@
 #include "animal.h"
 
-/**
- * C'est le construteur d'Animal, il load l'image du bon animal et set une position de debut random
-*/
+
 
 animal::animal(const std::string& file_path, SDL_Surface* window_surface_ptr){
     window_surface_ptr_ = window_surface_ptr;
@@ -21,9 +19,7 @@ void animal::draw(){
 		};
 
 
-
-
 animal::~animal(){
     SDL_FreeSurface(image_);
-   // SDL_FreeSurface(window_surface_ptr_);
+    //SDL_FreeSurface(window_surface_ptr_);
 };
