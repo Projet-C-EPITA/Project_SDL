@@ -47,7 +47,7 @@ void wolf::get_neareast_animal(std::vector<std::shared_ptr<animal>> animals)
 void wolf::move()
 {
     is_get_sheep();
-
+    time_to_catch();
     // if th dog is to close then the wolf get away
     if (to_close)
     {
@@ -73,40 +73,26 @@ void wolf::move()
             pos.y++;
     }
 
-    // wolf::time_to_catch();
+   
 }
 
-/*
- // Create a time_point that will hold the start time
-    std::chrono::time_point<std::chrono::steady_clock> start =
- std::chrono::steady_clock::now();
 
-    // Perform some operation
-    std::this_thread::sleep_for(std::chrono::seconds(5));
-
-    // Calculate the duration of the operation
-    std::chrono::duration<double> duration = std::chrono::steady_clock::now() -
- start; std::cout << "Duration of operation: " << duration.count() << " seconds"
- << std::endl;
-
-    // Reset the time_point to the current time
-    start = std::chrono::steady_clock::now();
-*/
 
 void wolf::time_to_catch()
 {
-    if (get_Sheep)
+    if (get_Sheep) 
     {
         m_lastMealTime = SDL_GetTicks();
     }
+    else{
+        Uint32 elapsedTime = SDL_GetTicks() - m_lastMealTime;
 
-    Uint32 elapsedTime = SDL_GetTicks() - m_lastMealTime;
-
-    if (elapsedTime > kStarvationPeriod)
-    {
-        std::cout << "Wolf has died of starvation" << std::endl;
-        isalive = false;
+        if (elapsedTime > kStarvationPeriod)
+        {
+            isalive = false;
+        }
     }
+    
 }
 
 void wolf::is_get_sheep()

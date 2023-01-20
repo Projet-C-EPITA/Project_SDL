@@ -64,20 +64,30 @@ public:
     SDL_Rect pos;
     TYPE type;
     bool isalive = true;
-
-    // todo: The constructor has to load the sdl_surface that corresponds
-    // to the texture
+    
+    
+    /**
+     * @summary: This function that loads the sdl_surface that corresponds
+     * to the texture
+     * @param {file_path} : string of the name of the path of the file
+     * @param {*window_surface_ptr} : is a pointer to an SDL_Surface object that
+     * represents the surface of the window. Where the image will be drawn on
+     * screen.
+     */
     animal(const std::string &file_path, SDL_Surface *window_surface_ptr);
 
-    // todo: Use the destructor to release memory and clean-up behind you
     ~animal();
-
-    // todo: Draw the animal on the screen window_surface_ptr
-    // Note that this function is not virtual, it does not depend on the
-    // static type of the instance
+    
+    /**
+     * @summary: Draw the animal on the screen window_surface_ptr
+     * Note that this function is not virtual, it does not depend on the
+     * static type of the instance
+     */
     void draw();
 
     virtual void move() = 0;
+
+    
 };
 
 #endif

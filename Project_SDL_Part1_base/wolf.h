@@ -16,7 +16,9 @@ private:
     std::shared_ptr<animal> nearest_sheep;
     bool to_close = false;
     bool get_Sheep = false;
-    Uint32 m_lastMealTime;
+   
+    Uint32 m_lastMealTime = SDL_GetTicks() ;
+     // SI marche pas la mettre dans le constructeur d'animal ou faire un constructeur pour
 
 public:
     /**
@@ -60,6 +62,8 @@ public:
      *
      */
     void get_neareast_animal(std::vector<std::shared_ptr<animal>> animals);
+
+    
 };
 
 #endif
