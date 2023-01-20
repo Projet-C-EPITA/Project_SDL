@@ -1,1 +1,0 @@
-/usr/bin/g++ -g -rdynamic CMakeFiles/SDL_part1.dir/main.cpp.o CMakeFiles/SDL_part1.dir/Project_SDL1.cpp.o CMakeFiles/SDL_part1.dir/animal.cpp.o CMakeFiles/SDL_part1.dir/sheep.cpp.o CMakeFiles/SDL_part1.dir/wolf.cpp.o CMakeFiles/SDL_part1.dir/utility.cpp.o CMakeFiles/SDL_part1.dir/shepherd.cpp.o -o SDL_part1  -L/usr/lib/x86_64-linux-gnu  -lSDL2 -lSDL2_image 
