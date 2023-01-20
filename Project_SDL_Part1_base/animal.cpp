@@ -21,5 +21,4 @@ void animal::draw(){
 
 animal::~animal(){
     SDL_FreeSurface(image_);
-    //SDL_FreeSurface(window_surface_ptr_);
 };

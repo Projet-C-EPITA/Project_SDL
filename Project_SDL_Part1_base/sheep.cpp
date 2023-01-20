@@ -2,9 +2,6 @@
 #include "sheep.h"
 
 
-/*
-* This function move the sheep so he bounces on walls & escape wolf
-*/
 
 void sheep::move(){
 
@@ -196,9 +193,7 @@ void sheep::move(){
   }    
 
 
-/**
- * function to get nearest wolf to go on opposite direction
-*/
+
 void sheep::get_nearest_wolf(std::vector<std::shared_ptr<animal>> animals){
     int animal_distance_x ;
     int animal_distance_y ;

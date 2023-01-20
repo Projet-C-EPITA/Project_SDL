@@ -25,15 +25,26 @@ class sheep : public animal{
 	animal(file_path, window_surface_ptr) {} ;
 
 	~sheep() = default;
-	// THe sheep move randomly on the map expect when he getting too close to a wolf, they get a temporary speed boost in the opposite direction of the wolf. When two sheep meet
-	//they can produce an offspring 
+	
 
+	/**
+     * @summary: This function move randomly on the map and bouncing on the
+     * edges expect when he getting too close to a wolf, they get a temporary
+     * speed boost in the opposite direction of the wolf. When two sheep
+     * meet(MALE and FEMALE) they can produce an offspring.
+     */
 	virtual void move() ;
+
+	/**
+     * @summary: This function calculates the min distance of the sheep from one
+     * of the wolf in the ground and puts the position of the nearest wolf in
+     * nearest_wolf
+     * @param {animals}: Take the vector of animal to browse it.
+     *
+     */
 	void get_nearest_wolf(std::vector<std::shared_ptr<animal>> animals);
 	void createOffspring();
-	
-	// in order to verifie if sheep is too close to a wolf
-	//virtual void get_neareast_animal(std::vector<std::shared_ptr<animal>> animals);
+
 };
 
 #endif

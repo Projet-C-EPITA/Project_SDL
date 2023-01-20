@@ -31,11 +31,7 @@ public:
     */
     shepherd(const std::string &file_path, SDL_Surface *window_surface_ptr);
 
-    /**
-     * TODO: voir si on tej pas car sharepointer pas besoin de destructeur
-     * @summary This function is the destructor of shepherd
-     * 
-    */
+   
     ~shepherd();
     
     /**
@@ -52,13 +48,7 @@ public:
     */
     void move();
 
-    /**
-     * TODO: Avoir si on supprime pas car pas utilisé
-     * @summary This function set the event
-     * 
-    */
-    void set_Event(SDL_Event *ev);
-
+  
     SDL_Rect get_pos_shepherd();
 };
 

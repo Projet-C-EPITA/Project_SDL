@@ -50,6 +50,9 @@ void wolf::move()
     is_get_sheep();
     time_to_catch();
     // Si un chien est trop proche alors le loup s'en eloigne
+     
+
+
     if (to_close)
     {
         if (pos.x > closest_dog_pos_.x)
@@ -73,6 +76,9 @@ void wolf::move()
         if (pos.y < nearest_sheep_pos_.y)
             pos.y++;
     }
+
+    
+
 }
 
 void wolf::time_to_catch()

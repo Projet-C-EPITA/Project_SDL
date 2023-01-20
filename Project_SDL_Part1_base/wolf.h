@@ -15,7 +15,7 @@ private:
     std::shared_ptr<animal> nearest_sheep;
     bool to_close = false;
     bool get_Sheep = false;
-    int speed = 2;
+    int speed = 1;
     Uint32 m_lastMealTime = SDL_GetTicks();
 
 public:

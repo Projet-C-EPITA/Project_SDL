@@ -203,7 +203,7 @@ unsigned ground::update(){
 				
 		}		
 		
-		//A mettre dans le dtor de app
+		
 		SDL_DestroyRenderer(window_renderer_);
 		SDL_DestroyWindow(window_ptr_);
 		SDL_Quit();
