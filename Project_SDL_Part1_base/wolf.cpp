@@ -22,7 +22,7 @@ void wolf::get_neareast_animal(std::vector<std::shared_ptr<animal>> animals){
                 nearest_sheep_pos_ = animal_ptr->pos;
             }
         }
-        // PAs fou de copier a voir si mieux plus tard
+        
         else if (animal_ptr->type == DOG){
             animal_distance_x = animal_ptr->pos.x - pos.x;
             animal_distance_y = animal_ptr->pos.y - pos.y;

@@ -38,7 +38,7 @@ unsigned ground::update(){
 			// Calcule ici le mouton le plus proche pour change la direction du loup
 			if (animal_ptr->type == WOLF){
 				auto wolfs = std::static_pointer_cast<wolf>(animal_ptr);
-				wolfs->get_neareast_animal(ground::animals); // TODO :va en meme temps calculer closest dog
+				wolfs->get_neareast_animal(ground::animals); // va en meme temps calculer closest dog
 			}
 			if (animal_ptr->type == SHEEP){
 				auto sheeps = std::static_pointer_cast<sheep>(animal_ptr);
@@ -46,6 +46,11 @@ unsigned ground::update(){
 				if(sheeps->offspring == true){
 					new_sheeps++;
 				}
+			}
+			if (animal_ptr->type == DOG){
+				auto sheep_dogs = std::static_pointer_cast<sheep_dog>(animal_ptr);
+				sheep_dogs->get_shepherd_pos(ground::shepherds); 
+				
 			}
 			
 			if(new_sheeps>=1){
