@@ -5,7 +5,7 @@
 
 #include <iostream>
 #include <string>
-#include <chrono>
+
 
 class wolf : public animal{
 	
