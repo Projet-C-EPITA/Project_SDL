@@ -3,6 +3,7 @@
 
 #pragma once
 #include <string>
+#include <chrono>
 #include "animal.h"
 
 //class animal;
@@ -19,6 +20,7 @@ class sheep : public animal{
 	public:
 
 	bool offspring = false;
+	Uint32 last_offspring = SDL_GetTicks();
 	sheep(const std::string& file_path, SDL_Surface* window_surface_ptr):
 	animal(file_path, window_surface_ptr) {} ;
 
